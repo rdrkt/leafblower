@@ -5,3 +5,7 @@ app/tmp/*
 app/[Cc]onfig/core.php
 app/[Cc]onfig/database.php
 !empty
+/leafblower.phpproj
+/leafblower.puo
+/leafblower.sln
+/leafblower.suo
