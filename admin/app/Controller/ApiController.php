@@ -12,14 +12,22 @@ class ApiController extends AppController {
 		
 		$blocks = $this->Block->find('all');
 		
-		$result = array();
+		$results = array();
 		
 		foreach ($blocks as $block){
-			$block = $block['Block'];
-			
-			$result[$block['type']][] = $block;
+			$block = $block['Block'];			
+			$results[$block['type']][] = $block;
+		}
+
+		$blocks = array();
+		foreach($results as $type => $result){
+			$blocks[] = array(
+					'name' => Inflector::humanize($type),
+					'type' => $type,
+					'blocks' => $result,
+			);
 		}
 		
-		return $this->_toJson($result);
+		return $this->_toJson($blocks);
 	}
 }
