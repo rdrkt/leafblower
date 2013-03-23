@@ -5,7 +5,7 @@ var blocks = (function () {
 
     _this.run = function () {
 
-
+        
         return _this;
     };
 
