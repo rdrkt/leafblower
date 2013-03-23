@@ -12,30 +12,58 @@
 
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/template.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         
-        <header>
-            <nav><a href="#create" id="create-profile"></a></nav>
+        <header class="clearfix">
+			<h1>Leafblower</h1>
+            <nav>
+				<a href="#add-profile" title="Add profile">
+					<img src="images/add-profile.png" alt="Add profile">
+				</a>
+				<a href="#list-profiles" title="List profile">
+					<img src="images/list-profiles.png" alt="List profile">
+				</a>
+			</nav>
         </header>
 
-        <main>
+        <main class="clearfix">
             
 			<aside>
 				<ul id="block-menu">
 				</ul>
 			</aside>
 			
+			<section id="add-profile">
+				<h2>Fill in the form to create a profile</h2>
+				<form name="frm-add-profile">
+					<label for="txtProfileName">Profile Name</label>
+					<input type="text" value="" id="txtProfileName" name="txtProfileName" />
+					<label for="txtProfileName">Profile Name</label>
+					<textarea id="txtProfileDescription" name="txtProfileDescription">
+				</form>
+			</section>
 			
+			<section id="list-profiles" class="active">
+				<ul></ul>
+			</section>
 			
+			<section id="update-profile">
+				<form name="frm-add-profile">
+					<label for="txtProfileName"></label>
+					
+					<input type="hidden" name="hdnProfileId" id="hdnProfileId" value="">
+				</form>
+			</section>
+						
         </main>
 
         <footer>
-            <p class="powered">Leafblower by RDRKT.com</p>
+            <p class="powered">Leafblower by <a href="http://www.rdrkt.com" target="_blank" title="RDRKT">RDRKT.com</a></p>
         </footer>
-
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
