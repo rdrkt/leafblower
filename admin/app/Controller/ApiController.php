@@ -3,8 +3,8 @@
 class ApiController extends AppController {
 	public $uses = array('Block', 'Users', 'Profiles', 'Logs');
 	
-	protected function _toJsonP($array){
-		return "callback('" . json_encode($array) . "')";		
+	protected function _toJson($array){
+		return json_encode($array);		
 	}	
 	
 	public function block(){
