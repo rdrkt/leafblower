@@ -20,6 +20,6 @@ class ApiController extends AppController {
 			$result[$block['type']][] = $block;
 		}
 		
-		return $this->_toJsonP($result);
+		return $this->_toJson($result);
 	}
 }
