@@ -138,7 +138,7 @@ main {
 
     main section {
         float:left;
-        padding:10px;
+        padding:10px 20px;
         display:none;
     }
         
@@ -156,15 +156,41 @@ main {
             main section .field-wrapper input.textbox,
             main section .field-wrapper textarea {
                 padding:3px;
-                border:1px solid #ccc;
+                border:1px solid #D4D6D4;
                 width:300px;
             }
             
             main section .profile-block-list {
                 min-height:200px;
-                width:600px;
-                border:1px solid #ccc;
-                padding:15px;
+                width:505px;
+                border:1px dashed #D4D6D4;
+                border-radius:7px;                
+                padding:7px;
+                margin-bottom:15px;
+            }
+            
+            main section .profile-block-list.drag-here {
+                border-color:#0C6BA1;
+                background:url("../images/drag-here-bg.png") no-repeat center center Transparent;
+            }
+                
+                main section .profile-block-list .added-block {
+                    padding:5px;
+                    border-radius:3px;
+                    margin-bottom:7px;
+                    background:#0C6BA1;
+                    color:#D4D6D4;
+                    transition:background .5s, color .5s;
+                }
+                
+                    main section .profile-block-list .added-block input {
+                        float:right;
+                        padding:0;
+                        width:50px;
+                    }
+            
+            main section .button-save-profile {
+                float:right;
             }
 
 main section.active {

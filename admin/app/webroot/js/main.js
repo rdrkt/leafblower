@@ -26,26 +26,38 @@ var adminCp = (function () {
         //empty out list
         $listWrapper.empty();
 
-        //AJAXCOMMENT$.get('/api/block', function (data) {
-        var data = JSON.parse('[{ "name": "Counting", "type": "counting", "blocks": [{ "_id": "countingBeanstalkd", "type": "counting", "title": "Beanstalkd Tube Counting", "description": "Block for visualizing the size of tubes and the workers that are watching them", "ttl": 1000, "options": { "value1": "default", "value2": "default2"} }, { "_id": "countingMongodb", "type": "counting", "title": "Mongodb Collection Counting", "description": "Block for visualizing the size of collections and their indexes", "ttl": 1000, "options": { "value1": "default", "value2": "default2"}}] }, { "name": "Geospacial", "type": "geospacial", "blocks": [{ "_id": "geoCheckIns", "type": "geospacial", "title": "Checkin visualiser", "description": "Block for visualizing the checkins occuring in your app bound by a circle centered at a given lat\/lon and radius", "ttl": 5000, "options": { "lat": -33.873651, "lon": -151.2068896, "radius": 50, "collection": "checkins"}}] }, { "name": "Filesystem", "type": "filesystem", "blocks": [{ "_id": "gridfsView", "type": "filesystem", "title": "Mongodb GridFS Viewer", "description": "View all the files in your GridFS collection as if they are in a physical storage volume", "ttl": 1000, "options": []}]}]'); ;
+        $.get('http://leafblower.rdrkt.com/api/block', function (data) {
+            //var data = JSON.parse('[{ "name": "Counting", "type": "counting", "blocks": [{ "_id": "countingBeanstalkd", "type": "counting", "title": "Beanstalkd Tube Counting", "description": "Block for visualizing the size of tubes and the workers that are watching them", "ttl": 1000, "options": { "value1": "default", "value2": "default2"} }, { "_id": "countingMongodb", "type": "counting", "title": "Mongodb Collection Counting", "description": "Block for visualizing the size of collections and their indexes", "ttl": 1000, "options": { "value1": "default", "value2": "default2"}}] }, { "name": "Geospacial", "type": "geospacial", "blocks": [{ "_id": "geoCheckIns", "type": "geospacial", "title": "Checkin visualiser", "description": "Block for visualizing the checkins occuring in your app bound by a circle centered at a given lat\/lon and radius", "ttl": 5000, "options": { "lat": -33.873651, "lon": -151.2068896, "radius": 50, "collection": "checkins"}}] }, { "name": "Filesystem", "type": "filesystem", "blocks": [{ "_id": "gridfsView", "type": "filesystem", "title": "Mongodb GridFS Viewer", "description": "View all the files in your GridFS collection as if they are in a physical storage volume", "ttl": 1000, "options": []}]}]'); ;
 
-        $.each(data, function (key, type) {
-            if (type.blocks.length > 0) {
-                $listWrapper.append('<li><a href="" title="' + type.name + '" id="' + type.type + '">' + type.name + '</a><ul class="blocks-list"></ul></li>');
-                $blocksWrapper = $('#' + type.type).siblings('.blocks-list');
-                $.each(type.blocks, function (key, block) {
-                    $blocksWrapper.append('<li><a href="" title="' + block.title + '" class="block-dragger">' + block.title + '</a></li>');
-                    $blocksWrapper.find('li:last-child a').data({ 'desc': block.description, 'id': block.id, 'type': block.type });
-                });
-            }
+            $.each(JSON.parse(data), function (key, type) {
+                if (type.blocks.length > 0) {
+                    $listWrapper.append('<li><a href="" title="' + type.name + '" id="' + type.type + '">' + type.name + '</a><ul class="blocks-list"></ul></li>');
+                    $blocksWrapper = $('#' + type.type).siblings('.blocks-list');
+                    $.each(type.blocks, function (key, block) {
+                        var stringifiedOptions = encodeURI(JSON.stringify(block.options));
+                        $blocksWrapper.append('<li><a href="" title="' + block.title + '" id="' + block._id + '" data-id="' + block._id + '" data-type="' + block.type + '" data-title="' + block.title + '" data-description="' + block.description + '" data-ttl="' + block.ttl + '" data-options="' + stringifiedOptions + '" class="block-dragger">' + block.title + '</a></li>');
+                        $('#' + block._id).draggable({
+                            snap: '.profile-block-list',
+                            snapMode: 'inner',
+                            revert: true,
+                            revertDuration: 0,
+                            start: function () {
+                                $('.profile-block-list').addClass('drag-here');
+                            },
+                            stop: function () {
+                                $('.profile-block-list').removeClass('drag-here');
+                            }
+                        });
+                    });
+                }
+
+            });
+
+            $listWrapper.children('li:first-child').children('ul').addClass('open');
+            $listWrapper.children('li:first-child').children('a').addClass('open');
+
 
         });
-
-        $listWrapper.children('li:first-child').children('ul').addClass('open');
-        $listWrapper.children('li:first-child').children('a').addClass('open');
-
-
-        //AJAXCOMMENT});
 
         _this.hideLoader();
     };
@@ -53,13 +65,17 @@ var adminCp = (function () {
     _this.loadProfileList = function () {
         _this.showLoader();
 
-        //AJAXCOMMENT$.get('/api/profile', function (data) {
+        //AJAXCOMMENT$.get('http://leafblower.rdrkt.com/api/profile', function (data) {
 
-
+        //var data = JSON.parse('');
 
         //AJAXCOMMENT});
 
         _this.hideLoader();
+    };
+
+    _this.saveProfile = function () {
+
     };
 
     _this.loadEvents = function () {
@@ -79,11 +95,70 @@ var adminCp = (function () {
             });
         });
 
-        $(document).on('click', '#block-menu > li > a', function (e) {
+        $(document).on('click', '#block-menu a', function (e) {
             e.preventDefault();
-            $(this).siblings('ul').slideToggle(100);
-            $(this).toggleClass('open');
-            $(this).siblings('ul').toggleClass('open');
+            if (!$(this).hasClass('block-dragger')) {
+                $(this).siblings('ul').slideToggle(100);
+                $(this).toggleClass('open');
+                $(this).siblings('ul').toggleClass('open');
+            }
+        });
+
+        //new/existing profile submission
+        $(document).on('click', '.button-save-profile', function (e) {
+            e.preventDefault();
+
+            _this.showLoader();
+
+            //syntax:  {_id: "my-awesome-profile", name: "My Awesome Profile", description: "My super awesome profile has everything!", blocks: [ { _id:"countingMongodb", options:{}, ttl: 100 }, {_id: "countingBeanstalkd", options : { }, ttl: 100 }]}
+            var profile = {};
+            var $form = $(this).parent();
+
+            if ($form.find('.hidden-profile-id').length > 0) { profile['_id'] = $form.find('.hidden-profile-id').val(); }
+
+            profile['name'] = $form.find('.profile-name').val();
+            profile['description'] = $form.find('.profile-description').val();
+            profile['blocks'] = JSON.parse(decodeURI($form.find('.blockJson').val()));
+
+            console.log(profile);
+
+            $.post('http://leafblower.rdrkt.com/api/profile', profile, function () {
+
+                alert('Profile saved');
+                _this.hideLoader();
+
+            }, 'json');
+
+        });
+
+        $(document).on('submit', '.profile-sender', function (e) {
+            e.preventDefault();
+            $(this).find('.button-save-profile').click();
+        });
+
+        //what happens when a block is dropped on profile
+        $(".profile-block-list").droppable({
+            accept: ".block-dragger",
+            drop: function (event, ui) {
+                var $link = $(ui.draggable).clone().removeAttr('style').removeAttr('class');
+                var newDiv = document.createElement('div');
+                $.each($link[0].attributes, function (key, attr) {
+                    newDiv.setAttribute(attr.nodeName, attr.value);
+                });
+                newDiv.setAttribute('class', 'added-block');
+                $(this).append($(newDiv).html('<span>' + $link.attr('title') + '</span><input type="text" size="5" name="ttl-' + $link.attr('id') + '" class="update-ttl" value="' + $link.data('ttl') + '" />'));
+
+                var blockList = $(this).find('input.blockJson').val();
+                if (blockList != '') {
+                    blockList = JSON.parse(decodeURI(blockList));
+                } else {
+                    blockList = [];
+                }
+
+                blockList.push({ '_id': $link.attr('id'), 'options': {}, 'ttl': $link.data('ttl') });
+
+                $(this).find('input.blockJson').val(encodeURI(JSON.stringify(blockList)));
+            }
         });
 
     };

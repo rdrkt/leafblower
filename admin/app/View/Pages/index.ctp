@@ -40,28 +40,26 @@
 				</ul>
 			</aside>
 			
-			<section id="add-profile">
+			<section id="add-profile" class="active">
 				<h2>Fill in the form to create a profile</h2>
 				<form name="frm-add-profile" class="profile-sender">
 					<div class="field-wrapper clearfix">
-						<label for="txtProfileName">Profile Name</label>
-						<input type="text" value="" id="txtProfileName" name="txtProfileName" class="textbox" />
+						<label for="txtNewProfileName">Profile Name</label>
+						<input type="text" value="" id="txtNewProfileName" name="txtNewProfileName" class="textbox profile-name" />
 					</div>
 					<div class="field-wrapper clearfix">
-						<label for="txtProfileDescription">Profile Description</label>
-						<textarea id="txtProfileDescription" name="txtProfileDescription"></textarea>
+						<label for="txtNewProfileDescription">Profile Description</label>
+						<textarea id="txtNewProfileDescription" name="txtNewProfileDescription" class="profile-description"></textarea>
 					</div>
 					<div class="profile-block-list">
+                        <input type="hidden" value="" class="blockJson" name="newBlockJson" />
 					</div>
+                    <input type="submit" name="button-save-profile" class="button-save-profile" value="Create new profile" />
 				</form>
 			</section>
 			
-			<section id="list-profiles" class="active">
+			<section id="list-profiles">
 				<ul></ul>
-			</section>
-			
-			<section id="update-profile">
-				
 			</section>
 						
         </main>
@@ -72,6 +70,7 @@
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/vendor/jquery-ui-1.10.2.custom.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
     </body>
