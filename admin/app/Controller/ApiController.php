@@ -4,7 +4,9 @@ class ApiController extends AppController {
 	public $uses = array('Block', 'User', 'Profile', 'Log');
 	
 	public function beforeFilter(){
+		Configure::write('debug', 0);
 		$this->autoRender = false;
+		$this->response->header('Access-Control-Allow-Origin: *');
 	}
 	
 	protected function _toJson($array){
@@ -37,8 +39,29 @@ class ApiController extends AppController {
 		}
 		
 		if($this->request->isPost()){
-			$ret = false;
-			return $this->_toJson($ret);
+			//get any existing data about the profile
+			
+			$data = $this->request->data;			
+			//$data = current($data);
+						
+			$id = $data['_id'];
+			
+			$profile = $this->Profile->findById($id);
+			if(!empty($profile)){
+				$profile = $profile['Profile'];
+			} else {
+				$profile = array();
+			}
+			
+			$data = array_merge($profile, $data);
+			
+			$data = $this->Profile->save($data);
+			
+			if(!empty($data)){
+				return $this->_toJson($data['Profile']);
+			}
+			
+			return $this->_toJson(false);
 		}		
 
 		return $this->_toJson(false);
@@ -91,7 +114,11 @@ class ApiController extends AppController {
 			
 			$data = $this->User->save($data);
 			
-			return $this->_toJson($data);
+			if(!empty($data)){
+				return $this->_toJson($data['User']);
+			}
+			
+			return $this->_toJson(false);
 		}
 	
 		return $this->_toJson(false);

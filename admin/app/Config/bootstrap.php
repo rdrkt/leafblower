@@ -108,4 +108,4 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
-CakePlugin::load('Queue');
+CakePlugin::load('Mongodb');

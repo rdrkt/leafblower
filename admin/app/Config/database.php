@@ -56,7 +56,7 @@
 class DATABASE_CONFIG {
 
 	public $default = array(
-		'datasource' => 'Queue.MongodbSource',
+		'datasource' => 'Mongodb.MongodbSource',
 		'persistent' => false,
 		'host' => '127.0.0.1',
 		'database' => 'leafblower',
