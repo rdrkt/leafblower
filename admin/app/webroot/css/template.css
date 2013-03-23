@@ -41,18 +41,131 @@ header {
         header nav a:hover {
             background:#000F1C;
         }
-        
-main aside {
-    float:left;
-    width:250px;
-    border-right:1px solid 
-}
 
-main section {
-    float:left;
-    padding:10px;
-    display:none;
+main {
+    color:#333;
+    position:relative;
 }
+    
+    main #loading-overlay {
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        opacity:0.5;
+        background:#FFFDEB;
+        z-index:99;
+        display:none;
+    }
+    
+    main #loading-gif {
+        display:none;
+        position:absolute;
+        top:50%;
+        margin-top:-11px;
+        left:50%;
+        margin-left:-63px;
+        z-index:100;
+    }
+    
+    main aside {
+        float:left;
+        height:100%;
+        width:250px;
+        border-right:1px solid 
+    }
+    
+        main aside ul {
+            list-style:none;
+            margin:0 10px;
+            padding:0;
+        }
+        
+            main aside #block-menu li {
+                padding:10px 0 0;
+            }
+            
+                main aside #block-menu li a {
+                    display:block;
+                    outline:none;
+                }
+                
+                main aside #block-menu > li > a:before {
+                    content:"[+]";
+                    font-family:Monospace;
+                    font-size:12px;
+                    padding-right:5px;
+                    margin-top:2px;
+                    float:left;
+                }
+                
+                main aside #block-menu li a.open:before {
+                    content:"[-]";
+                }
+            
+                main aside #block-menu li ul {
+                    display:none;
+                    margin:10px 0 0 10px;
+                }
+                
+                main aside #block-menu li ul.open {
+                    display:block;
+                }
+                
+                    main aside #block-menu li ul li {
+                        padding:5px 0 0;
+                    }
+                    
+                    main aside #block-menu li ul li:first-child {
+                        padding:0;
+                    }
+                    
+                        main aside #block-menu li ul li a {
+                            padding:5px;
+                            border-radius:3px;
+                            background:#0C6BA1;
+                            color:#00182E;
+                            transition:background .5s, color .5s;
+                            cursor:move;
+                        }
+                        
+                        main aside #block-menu li ul li a:hover,
+                        main aside #block-menu li ul li a:active {
+                            background:#00182E;
+                            color:#0C6BA1;
+                        }
+
+    main section {
+        float:left;
+        padding:10px;
+        display:none;
+    }
+        
+        main section .field-wrapper {
+            margin-bottom:15px;
+        }
+        
+            main section label {
+                float:left;
+                width:200px;
+                text-align:right;
+                padding-right:15px;
+            }
+            
+            main section .field-wrapper input.textbox,
+            main section .field-wrapper textarea {
+                padding:3px;
+                border:1px solid #ccc;
+                width:300px;
+            }
+            
+            main section .profile-block-list {
+                min-height:200px;
+                width:600px;
+                border:1px solid #ccc;
+                padding:15px;
+            }
 
 main section.active {
     display:block;

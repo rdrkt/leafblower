@@ -32,6 +32,9 @@
 
         <main class="clearfix">
             
+			<div id="loading-overlay"></div>
+			<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
+			
 			<aside>
 				<ul id="block-menu">
 				</ul>
@@ -39,11 +42,17 @@
 			
 			<section id="add-profile">
 				<h2>Fill in the form to create a profile</h2>
-				<form name="frm-add-profile">
-					<label for="txtProfileName">Profile Name</label>
-					<input type="text" value="" id="txtProfileName" name="txtProfileName" />
-					<label for="txtProfileDescription">Profile Description</label>
-					<textarea id="txtProfileDescription" name="txtProfileDescription"></textarea>
+				<form name="frm-add-profile" class="profile-sender">
+					<div class="field-wrapper clearfix">
+						<label for="txtProfileName">Profile Name</label>
+						<input type="text" value="" id="txtProfileName" name="txtProfileName" class="textbox" />
+					</div>
+					<div class="field-wrapper clearfix">
+						<label for="txtProfileDescription">Profile Description</label>
+						<textarea id="txtProfileDescription" name="txtProfileDescription"></textarea>
+					</div>
+					<div class="profile-block-list">
+					</div>
 				</form>
 			</section>
 			
@@ -52,11 +61,7 @@
 			</section>
 			
 			<section id="update-profile">
-				<form name="frm-add-profile">
-					<label for="txtProfileName"></label>
-					
-					<input type="hidden" name="hdnProfileId" id="hdnProfileId" value="">
-				</form>
+				
 			</section>
 						
         </main>
