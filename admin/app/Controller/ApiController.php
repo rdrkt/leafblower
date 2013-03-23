@@ -43,9 +43,17 @@ class ApiController extends AppController {
 			
 			$data = $this->request->data;			
 			//$data = current($data);
-						
-			$id = $data['_id'];
 			
+			if(empty($data['_id']) && empty($data['name'])){
+				return $this->toJason(false);
+			}
+			
+			if(empty($data['_id'])){
+				$id = $data['_id'] = Inflector::variable(Inflector::slug($data['name']));
+			}
+			
+			$id = $data['_id'];
+						
 			$profile = $this->Profile->findById($id);
 			if(!empty($profile)){
 				$profile = $profile['Profile'];
