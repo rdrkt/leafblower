@@ -1,8 +1,9 @@
 profiles:[
 	{
-		_id: ObjectId("4f3ed089fb60ab534684b7e9"),
+		_id: "my-awesome-profile",
 		name: "My Awesome Profile",
-		slug: "my-awesome-profile",
+		description: "",
+		
 		blocks: {
 			"countingMongodb" : { options:{value1: joshua}, ttl: 100 }, 
 			"counting" : { },
