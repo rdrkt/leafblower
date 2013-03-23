@@ -18,23 +18,28 @@
     <body>
         
         <header>
-            
+            <nav><a href="#create" id="create-profile"></a></nav>
         </header>
 
         <main>
             
-
-
+			<aside>
+				<ul id="block-menu">
+				</ul>
+			</aside>
+			
+			
+			
         </main>
 
         <footer>
-            <p class="powered"></p>
+            <p class="powered">Leafblower by RDRKT.com</p>
         </footer>
 
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-
+        <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
