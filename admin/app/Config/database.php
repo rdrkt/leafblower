@@ -56,14 +56,10 @@
 class DATABASE_CONFIG {
 
 	public $default = array(
-		'datasource' => 'Database/Mysql',
+		'datasource' => 'Queue.MongodbSource',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
-		'prefix' => '',
-		//'encoding' => 'utf8',
+		'host' => '127.0.0.1',
+		'database' => 'leafblower',
 	);
 
 	public $test = array(
