@@ -9,3 +9,6 @@ app/[Cc]onfig/database.php
 /leafblower.puo
 /leafblower.sln
 /leafblower.suo
+.settings/*
+.buildpath
+.project
