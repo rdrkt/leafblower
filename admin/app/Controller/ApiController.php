@@ -4,7 +4,7 @@ class ApiController extends AppController {
 	public function block(){
 		$this->autoRender = false;
 		
-		return json_encode(
+		return "function(" . json_encode(
 			array(
 				'counting' => array(
 					array(
@@ -31,6 +31,6 @@ class ApiController extends AppController {
 					),
 				),
 			)
-		);
+		) . ")";
 	}	
 }
