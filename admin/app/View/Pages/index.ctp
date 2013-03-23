@@ -42,8 +42,8 @@
 				<form name="frm-add-profile">
 					<label for="txtProfileName">Profile Name</label>
 					<input type="text" value="" id="txtProfileName" name="txtProfileName" />
-					<label for="txtProfileName">Profile Name</label>
-					<textarea id="txtProfileDescription" name="txtProfileDescription">
+					<label for="txtProfileDescription">Profile Description</label>
+					<textarea id="txtProfileDescription" name="txtProfileDescription"></textarea>
 				</form>
 			</section>
 			

@@ -29,16 +29,19 @@ header {
         float:right;
     }
     
-        header nav a {
+        header nav a,
+        header nav a:active {
             display:inline-block;
             padding:10px;
             background:#00182E;
             transition:background .5s;
+            outline:none;
         }
         
         header nav a:hover {
             background:#000F1C;
         }
+        
 main aside {
     float:left;
     width:250px;
@@ -48,6 +51,11 @@ main aside {
 main section {
     float:left;
     padding:10px;
+    display:none;
+}
+
+main section.active {
+    display:block;
 }
 
     main section h2 {
