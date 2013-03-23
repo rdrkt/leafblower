@@ -70,7 +70,17 @@ class ApiController extends AppController {
 			}
 			
 			return $this->_toJson(false);
-		}		
+		}
+		
+		if($this->request->isDelete()){
+			$id = $data['_id'];
+			
+			
+			
+			$return = $this->Profile->delete($id);
+			
+			$this->_toJson($id);
+		}
 
 		return $this->_toJson(false);
 	}
