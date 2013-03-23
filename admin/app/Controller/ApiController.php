@@ -1,10 +1,14 @@
 <?php
 
 class ApiController extends AppController {
+	public $uses = array('Block', 'Users', 'Profiles', 'Logs');
+	
 	public function block(){
 		$this->autoRender = false;
 		
-		return "function(" . json_encode(
+		#debug( $this->Block->find() );
+		
+		return "callback(" . json_encode(
 			array(
 				'counting' => array(
 					array(
