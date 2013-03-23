@@ -1,0 +1,2 @@
+{ "_id" : "countingBeanstalkd", "type" : "counting", "title" : "Beanstalkd Tube Counting", "description" : "Block for visualizing the size of tubes and the workers that are watching them", "ttl" : 1000, "options" : { "value1" : "default", "value2" : "default2" } }
+{ "_id" : "countingMongodb", "type" : "counting", "title" : "Mongodb Collection Counting", "description" : "Block for visualizing the size of collections and their indexes", "ttl" : 1000, "options" : { "value1" : "default", "value2" : "default2" } }
