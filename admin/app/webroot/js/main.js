@@ -15,7 +15,6 @@ var adminCp = (function () {
         var height = parseInt($('body').height() - $('header').outerHeight(true) - $('footer').outerHeight(true));
         $('aside').css('min-height', height + 'px');
         _this.loadBlockList();
-        _this.loadProfileList();
     };
 
     _this.loadBlockList = function () {
@@ -57,21 +56,64 @@ var adminCp = (function () {
             $listWrapper.children('li:first-child').children('a').addClass('open');
 
 
+            _this.hideLoader();
+            _this.loadProfileList();
         });
 
-        _this.hideLoader();
     };
 
     _this.loadProfileList = function () {
         _this.showLoader();
 
-        //AJAXCOMMENT$.get('http://leafblower.rdrkt.com/api/profile', function (data) {
+        $.get('http://leafblower.rdrkt.com/api/profile', function (data) {
 
-        //var data = JSON.parse('');
+            $('#list-profiles ul').empty();
 
-        //AJAXCOMMENT});
+            var profileMarkup = '', prefix;
 
-        _this.hideLoader();
+            $.each(data, function (k, profile) {
+
+                prefix = profile['_id'];
+
+                profileMarkup += '<li class="update-block-wrapper clearfix">';
+                profileMarkup += '<h3><a href="" title="' + profile['name'] + '" class="toggle-profile-update">' + profile['name'] + '</a></h3>';
+
+                profileMarkup += '<form name="frm-update-profile" class="profile-sender">';
+                profileMarkup += '<div class="field-wrapper clearfix" data-id="' + profile['_id'] + '">';
+                profileMarkup += '<label for="txt' + prefix + 'ProfileName">Profile Name</label>';
+                profileMarkup += '<input type="text" id="txt' + prefix + 'ProfileName" value="' + profile['name'] + '" name="txt' + prefix + 'ProfileName" class="textbox profile-name" />';
+                profileMarkup += '</div>';
+                profileMarkup += '<div class="field-wrapper clearfix">';
+                profileMarkup += '<label for="txt' + prefix + 'ProfileDescription">Profile Description</label>';
+                profileMarkup += '<textarea id="txt' + prefix + 'ProfileDescription" name="txt' + prefix + 'ProfileDescription" class="profile-description">' + profile['description'] + '</textarea>';
+                profileMarkup += '</div>';
+                profileMarkup += '<div class="profile-block-list">';
+                profileMarkup += '<input type="hidden" value="' + encodeURI(JSON.stringify(profile['blocks'])) + '" class="blockJson" name="newBlockJson" />';
+
+                $.each(profile['blocks'], function (key, block) {
+                    profileMarkup += '<div class="added-block"><span>' + $('#' + block['_id']).attr('title') + '</span><input type="text" size="5" name="ttl-' + block['_id'] + '" class="update-ttl" value="' + block['ttl'] + '" /></div>';
+                });
+
+                profileMarkup += '</div>';
+                profileMarkup += '<input type="hidden" class="hidden-profile-id" value="' + profile['_id'] + '" name="hdn' + prefix + 'ProfileId" />';
+                profileMarkup += '<input type="submit" name="button-save-profile" class="button-save-profile" value="Update profile" />';
+                profileMarkup += '</form>';
+
+                profileMarkup += '</li>';
+
+            });
+
+            $('#list-profiles ul').append(profileMarkup);
+
+            $('#list-profiles').find('.profile-block-list').droppable({
+                accept: '.block-dragger',
+                drop: function (event, ui) {
+                    _this.addBlockToProfile($(this), event, ui);
+                }
+            });
+
+            _this.hideLoader();
+        }, 'json');
     };
 
     _this.saveProfile = function () {
@@ -126,41 +168,74 @@ var adminCp = (function () {
 
                 alert('Profile saved');
                 _this.hideLoader();
+                _this.loadProfileList();
 
             }, 'json');
 
         });
 
+        //toggle open profile
+        $(document).on('click', '.toggle-profile-update', function (e) {
+            e.preventDefault();
+            $(this).parent().siblings('form').slideToggle(150);
+            $(this).toggleClass('expanded');
+        });
+
+        //fakes click on form submit from "return/enter/space"
         $(document).on('submit', '.profile-sender', function (e) {
             e.preventDefault();
             $(this).find('.button-save-profile').click();
         });
 
+        //reset for new profiles
+        $(document).on('click', '.button-reset-profile', function (e) {
+            $(this).siblings('.profile-block-list').find('div').remove();
+            $(this).siblings('.profile-block-list').find('.blockJson').val('');
+        });
+
         //what happens when a block is dropped on profile
-        $(".profile-block-list").droppable({
-            accept: ".block-dragger",
+        $('.profile-block-list').droppable({
+            accept: '.block-dragger',
             drop: function (event, ui) {
-                var $link = $(ui.draggable).clone().removeAttr('style').removeAttr('class');
-                var newDiv = document.createElement('div');
-                $.each($link[0].attributes, function (key, attr) {
-                    newDiv.setAttribute(attr.nodeName, attr.value);
-                });
-                newDiv.setAttribute('class', 'added-block');
-                $(this).append($(newDiv).html('<span>' + $link.attr('title') + '</span><input type="text" size="5" name="ttl-' + $link.attr('id') + '" class="update-ttl" value="' + $link.data('ttl') + '" />'));
-
-                var blockList = $(this).find('input.blockJson').val();
-                if (blockList != '') {
-                    blockList = JSON.parse(decodeURI(blockList));
-                } else {
-                    blockList = [];
-                }
-
-                blockList.push({ '_id': $link.attr('id'), 'options': {}, 'ttl': $link.data('ttl') });
-
-                $(this).find('input.blockJson').val(encodeURI(JSON.stringify(blockList)));
+                _this.addBlockToProfile($(this), event, ui);
             }
         });
 
+        //update ttl when defocus
+        $(document).on('blur', '.update-ttl', function () {
+            var $this = $(this);
+            var $jsonInput = $this.parents('.profile-block-list').find('input.blockJson');
+            var blockList = JSON.parse(decodeURI($jsonInput.val()));
+
+            $.each(blockList, function (key, block) {
+                if ($this.parent().attr('val') == block['_id']) {
+                    blockList[key]['ttl'] = parseInt($this.val());
+                }
+            });
+        });
+
+    };
+
+    _this.addBlockToProfile = function ($that, event, ui) {
+
+        var $link = $(ui.draggable).clone().removeAttr('style').removeAttr('class');
+        var newDiv = document.createElement('div');
+        $.each($link[0].attributes, function (key, attr) {
+            newDiv.setAttribute(attr.nodeName, attr.value);
+        });
+        newDiv.setAttribute('class', 'added-block');
+        $that.append($(newDiv).html('<span>' + $link.attr('title') + '</span><input type="text" size="5" name="ttl-' + $link.attr('id') + '" class="update-ttl" value="' + $link.data('ttl') + '" />'));
+
+        var blockList = $that.find('input.blockJson').val();
+        if (blockList != '') {
+            blockList = JSON.parse(decodeURI(blockList));
+        } else {
+            blockList = [];
+        }
+
+        blockList.push({ '_id': $link.attr('id'), 'options': {}, 'ttl': $link.data('ttl') });
+
+        $that.find('input.blockJson').val(encodeURI(JSON.stringify(blockList)));
     };
 
     _this.showLoader = function () {

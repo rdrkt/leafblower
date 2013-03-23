@@ -17,7 +17,9 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        
+        <div id="loading-overlay"></div>
+		<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
+
         <header class="clearfix">
 			<h1>Leafblower</h1>
             <nav>
@@ -30,17 +32,14 @@
 			</nav>
         </header>
 
-        <main class="clearfix">
-            
-			<div id="loading-overlay"></div>
-			<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
+        <main class="clearfix">           
 			
 			<aside>
 				<ul id="block-menu">
 				</ul>
 			</aside>
 			
-			<section id="add-profile" class="active">
+			<section id="add-profile">
 				<h2>Fill in the form to create a profile</h2>
 				<form name="frm-add-profile" class="profile-sender">
 					<div class="field-wrapper clearfix">
@@ -54,12 +53,14 @@
 					<div class="profile-block-list">
                         <input type="hidden" value="" class="blockJson" name="newBlockJson" />
 					</div>
+                    <input type="reset" name="button-reset-new-profile" class="button-reset-profile" value="Reset fields" />
                     <input type="submit" name="button-save-profile" class="button-save-profile" value="Create new profile" />
 				</form>
 			</section>
 			
-			<section id="list-profiles">
-				<ul></ul>
+			<section id="list-profiles" class="active">
+                <h2>Modify and delete existing profiles</h2>
+				<ul class="profile-list"></ul>
 			</section>
 						
         </main>
