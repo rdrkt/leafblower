@@ -37,7 +37,7 @@ class ApiController extends AppController {
 		}
 		
 		if($this->request->isPost()){
-			$ret = false;				
+			$ret = false;
 			return $this->_toJson($ret);
 		}		
 
@@ -45,20 +45,23 @@ class ApiController extends AppController {
 	}
 	
 	public function user( $id = "" ){
-		if(empty($id)){
-			//id is empty so list all users
-		
-			$ret = array();
-			$users = $this->User->find('all');
-		
-			foreach($users as $user){
-				$ret[] = $user['User'];
-			}
-		
-			return $this->_toJson($ret);
-		}
-		
 		if($this->request->isGet()){
+			if(empty($id)){
+				//id is empty so list all users
+			
+				$ret = array();
+				$users = $this->User->find('all');
+			
+				foreach($users as $user){
+					$user = $user['User'];
+					unset($user['password']);//never transmit (hashed) passwords over an open api
+			
+					$ret[] = $user;
+				}
+			
+				return $this->_toJson($ret);
+			}
+			
 			$user = $this->User->findById($id);
 				
 			$ret = false;
@@ -70,14 +73,31 @@ class ApiController extends AppController {
 		}
 	
 		if($this->request->isPost()){
-			$ret = false;
-			return $this->_toJson($ret);
+			//get any existing data about the user
+			
+			$data = $this->request->data;			
+			//$data = current($data);
+						
+			$id = $data['_id'];
+			
+			$user = $this->User->findById($id);
+			if(!empty($user)){
+				$user = $user['User'];
+			} else {
+				$user = array();
+			}
+			
+			$data = array_merge($user, $data);
+			
+			$data = $this->User->save($data);
+			
+			return $this->_toJson($data);
 		}
 	
 		return $this->_toJson(false);
 	}
 	
-	public function block( $id = '' ){
+	public function block( $id = '' ){ 
 		if($this->request->isGet()){
 			$blocks = $this->Block->find('all');
 			

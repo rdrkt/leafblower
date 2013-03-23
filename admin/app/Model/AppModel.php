@@ -32,7 +32,7 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
-	function findById($id){
+	public function findById($id){
 		return $this->find('first', array('conditions' => array('_id' => $id)));	
 	}
 }
