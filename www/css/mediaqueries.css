@@ -1,0 +1,109 @@
+/*
+*   Author: Andy Sharman
+*   Website: http://www.udjamaflip.com
+*   Licence: GNU/GPL V3+
+*/
+
+
+/* Large desktop only */
+@media 
+        /* legacy webkit */
+		only screen and (min-width:1301px) and (-webkit-max-device-pixel-ratio:1),
+		only screen and (min-device-height:1301px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:1301px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		/* legacy firefox */
+		only screen and (min-width:1301px) and (max--moz-device-pixel-ratio:1),
+		only screen and (min-device-height:1301px) and (min--moz-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:1301px) and (min--mozdevice-pixel-ratio: 1.5) and (orientation: portrait),
+		/* modern webkit */
+		only screen and (min-width:1301px) and (max-device-pixel-ratio:1),
+		only screen and (min-device-height:1301px) and (min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:1301px) and (min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		/* modern firefox */
+		only screen and (min-width:1301px) and (max-resolution: 1dppx),
+		only screen and (min-device-height:1301px) and (min-resolution: 1.5dppx) and (orientation: landscape),
+		only screen and (min-device-height:1301px) and (min-resolution: 1.5dppx) and (orientation: portrait) {
+	
+	header,main,footer {
+	    width:1280px;
+	}
+	
+}
+
+/* handle 960 tablet landscape and regular small desktop/notebook */
+@media
+        /* legacy webkit */
+		only screen and (min-width:961px) and (max-width: 1300px) and (-webkit-max-device-pixel-ratio:1),
+		only screen and (min-device-height:961px) and (max-device-height: 1300px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:961px) and (max-device-width: 1300px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		/* legacy firefox */
+		only screen and (min-width:961px) and (max-width: 1300px) and (max--moz-device-pixel-ratio:1),
+		only screen and (min-device-height:961px) and (max-device-height: 1300px) and (min--moz-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:961px) and (max-device-width: 1300px) and (min--mozdevice-pixel-ratio: 1.5) and (orientation: portrait),
+		/* modern webkit */
+		only screen and (min-width:961px) and (max-width: 1300px) and (max-device-pixel-ratio:1),
+		only screen and (min-device-height:961px) and (max-device-height: 1300px) and (min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:961px) and (max-device-width: 1300px) and (min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		/* modern firefox */
+		only screen and (min-width:961px) and (max-width: 1300px) and (max-resolution: 1dppx),
+		only screen and (min-device-height:961px) and (max-device-height: 1300px) and (min-resolution: 1.5dppx) and (orientation: landscape),
+		only screen and (min-device-height:961px) and (max-device-width: 1300px) and (min-resolution: 1.5dppx) and (orientation: portrait) {
+		    
+	header,main,footer {
+	    width:960px;
+	}
+	
+}
+
+/* handle tablets in portrait/small res devices only. */
+@media
+		/* legacy webkit */
+		only screen and (min-width:691px) and (max-width: 960px) and (-webkit-max-device-pixel-ratio:1),
+		only screen and (min-device-height:691px) and (max-device-height: 960px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:691px) and (max-device-width: 960px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		/* legacy firefox */
+		only screen and (min-width:691px) and (max-width: 960px) and (max--moz-device-pixel-ratio:1),
+		only screen and (min-device-height:691px) and (max-device-height: 960px) and (min--moz-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:691px) and (max-device-width: 960px) and (min--mozdevice-pixel-ratio: 1.5) and (orientation: portrait),
+		/* modern webkit */
+		only screen and (min-width:691px) and (max-width: 960px) and (max-device-pixel-ratio:1),
+		only screen and (min-device-height:691px) and (max-device-height: 960px) and (min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		only screen and (min-device-width:691px) and (max-device-width: 960px) and (min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		/* modern firefox */
+		only screen and (min-width:691px) and (max-width: 960px) and (max-resolution: 1dppx),
+		only screen and (min-device-height:691px) and (max-device-height: 960px) and (min-resolution: 1.5dppx) and (orientation: landscape),
+		only screen and (min-device-height:691px) and (max-device-width: 960px) and (min-resolution: 1.5dppx) and (orientation: portrait) {
+		
+	header,main,foooter {
+		width:640px;
+	}
+		
+}
+
+/* Mobile devices only, including higher dpi devices. */
+@media
+        /* S3/S2 hack for Samsung phones returning reverse device-width/width values */
+        only screen and (max-device-width: 721px) and (max-width:361px) and (-webkit-min-device-pixel-ratio:2) and (orientation: portrait),
+        only screen and (max-device-height: 1281px) and (max-height:400px) and (-webkit-min-device-pixel-ratio:2) and (orientation: landscape),
+		/* legacy webkit */
+		only screen and (max-width: 690px) and (-webkit-max-device-pixel-ratio:1),
+		only screen and (max-device-width: 690px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		only screen and (max-device-height: 690px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		/* legacy firefox */
+		only screen and (max-width: 690px) and (max--mozdevice-pixel-ratio:1),
+		only screen and (max-device-width: 690px) and (min--mozdevice-pixel-ratio: 1.5) and (orientation: portrait),
+		only screen and (max-device-height: 690px) and (min--mozdevice-pixel-ratio: 1.5) and (orientation: landscape),
+		/* modern webkit */
+		only screen and (max-width: 690px) and (max-device-pixel-ratio:1),
+		only screen and (max-device-width: 690px) and (min-device-pixel-ratio: 1.5) and (orientation: portrait),
+		only screen and (max-device-height: 690px) and (min-device-pixel-ratio: 1.5) and (orientation: landscape),
+		/* modern firefox */
+		only screen and (max-width: 690px) and (max-resolution: 1dppx),
+		only screen and (max-device-height: 690px) and (min-resolution: 1.5dppx) and (orientation: landscape),
+		only screen and (max-device-width: 690px) and (min-resolution: 1.5dppx) and (orientation: portrait) {
+	
+	header, main, footer {
+	    width:320px;
+	}
+	
+}
