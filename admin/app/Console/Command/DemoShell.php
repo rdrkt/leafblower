@@ -23,7 +23,7 @@ class DemoShell extends AppShell {
 	}
 	
 	private function _mongodb(){
-		$db = new MongoClient("mongodb://localhost");
+		$db = new Mongo("mongodb://localhost");
 		$db = $db->selectDb('demo');
 		
 		$animals = array('lions', 'tigers', 'llamas', 'monkeys', 'bears', 'giraffes', 'sheep', 'pumas');
