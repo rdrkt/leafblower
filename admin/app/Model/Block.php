@@ -9,7 +9,7 @@ class Block extends AppModel {
 		$ret = array();
 		foreach($collections as $collection){
 			$name = $collection->getName();
-			$ret[$name] = array('count' => $collection->count());
+			$ret[] = array('_id' => $name, 'count' => $collection->count(), 'indexes' => $collection->getIndexInfo());
 		}
 				
 		return $ret;
