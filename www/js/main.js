@@ -15,7 +15,7 @@ var viewManager = (function () {
     };
 
     _this.reshapePage = function () {
-        $('main').isotope();
+        $('main').isotope({ itemSelector: '.block', layoutMode: 'fitRows' });
     };
 
     //check current device
@@ -30,20 +30,6 @@ var viewManager = (function () {
     };
 
     _this.loadEvents = function () {
-
-        $(document).on('click', '.block', function () {
-
-            if ($(this).hasClass('large-block')) { var newWidth = 150, newHeight = 150; }
-            else { var newWidth = 310, newHeight = 310; }
-
-            $(this).animate({
-                'height': newHeight,
-                'width': newWidth
-            }, 100, function () {
-                $(this).toggleClass('large-block');
-                _this.reshapePage();
-            });
-        });
 
         //run it on window resize
         $(window).on('resize', function () {
@@ -61,6 +47,21 @@ var viewManager = (function () {
 
         _this.socket.on('data', function (data) {
             _this.blockController.handleData(data);
+        });
+
+        _this.socket.on('blockControllers', function (blockControllers) {
+
+            blockControllers = JSON.parse(blockControllers);
+
+            /*for (i = 0; i < blockControllers.length; i++) {
+                var h = document.getElementsByTagName('head')[0],
+                s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = '/js/blocks/' + blockControllers[i]['_id'] + '.js';
+                h.appendChild(s);
+            }*/
+
         });
     };
 

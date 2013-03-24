@@ -66,7 +66,7 @@
         </main>
 
         <footer>
-            <p class="powered">Leafblower by <a href="http://www.rdrkt.com" target="_blank" title="RDRKT">RDRKT.com</a></p>
+            <p class="powered">Leafblower by <a href="http://www.rdrkt.com" target="_blank" title="rdrkt">rdrkt.com</a></p>
         </footer>
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
