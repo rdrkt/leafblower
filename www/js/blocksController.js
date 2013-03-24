@@ -5,11 +5,13 @@ var blockController = (function () {
 
     _this.run = function () {
 
-
+        
         return _this;
     };
 
     _this.handleData = function (jsonString) {
+        
+        
         console.log(jsonString);
     };
 
