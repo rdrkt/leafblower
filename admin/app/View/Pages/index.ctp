@@ -17,7 +17,9 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        
+        <div id="loading-overlay"></div>
+		<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
+
         <header class="clearfix">
 			<h1>Leafblower</h1>
             <nav>
@@ -30,10 +32,7 @@
 			</nav>
         </header>
 
-        <main class="clearfix">
-            
-			<div id="loading-overlay"></div>
-			<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
+        <main class="clearfix">           
 			
 			<aside>
 				<ul id="block-menu">
@@ -44,24 +43,24 @@
 				<h2>Fill in the form to create a profile</h2>
 				<form name="frm-add-profile" class="profile-sender">
 					<div class="field-wrapper clearfix">
-						<label for="txtProfileName">Profile Name</label>
-						<input type="text" value="" id="txtProfileName" name="txtProfileName" class="textbox" />
+						<label for="txtNewProfileName">Profile Name</label>
+						<input type="text" value="" id="txtNewProfileName" name="txtNewProfileName" class="textbox profile-name" />
 					</div>
 					<div class="field-wrapper clearfix">
-						<label for="txtProfileDescription">Profile Description</label>
-						<textarea id="txtProfileDescription" name="txtProfileDescription"></textarea>
+						<label for="txtNewProfileDescription">Profile Description</label>
+						<textarea id="txtNewProfileDescription" name="txtNewProfileDescription" class="profile-description"></textarea>
 					</div>
 					<div class="profile-block-list">
+                        <input type="hidden" value="" class="blockJson" name="newBlockJson" />
 					</div>
+                    <input type="reset" name="button-reset-new-profile" class="button-reset-profile" value="Reset fields" />
+                    <input type="submit" name="button-save-profile" class="button-save-profile" value="Create new profile" />
 				</form>
 			</section>
 			
 			<section id="list-profiles" class="active">
-				<ul></ul>
-			</section>
-			
-			<section id="update-profile">
-				
+                <h2>Modify and delete existing profiles</h2>
+				<ul class="profile-list"></ul>
 			</section>
 						
         </main>
@@ -72,6 +71,7 @@
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/vendor/jquery-ui-1.10.2.custom.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
     </body>

@@ -12,6 +12,29 @@ a {
    outline:none;
 }
 
+
+#loading-overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:0.5;
+    background:#FFFDEB;
+    z-index:99;
+    display:none;
+}
+    
+#loading-gif {
+    display:none;
+    position:fixed;
+    top:50%;
+    margin-top:-11px;
+    left:50%;
+    margin-left:-63px;
+    z-index:100;
+}
+
 header {
     background:#00182E;
 }
@@ -46,28 +69,6 @@ main {
     color:#333;
     position:relative;
 }
-    
-    main #loading-overlay {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        opacity:0.5;
-        background:#FFFDEB;
-        z-index:99;
-        display:none;
-    }
-    
-    main #loading-gif {
-        display:none;
-        position:absolute;
-        top:50%;
-        margin-top:-11px;
-        left:50%;
-        margin-left:-63px;
-        z-index:100;
-    }
     
     main aside {
         float:left;
@@ -138,7 +139,8 @@ main {
 
     main section {
         float:left;
-        padding:10px;
+        width:523px;
+        padding:10px 20px;
         display:none;
     }
         
@@ -148,7 +150,7 @@ main {
         
             main section label {
                 float:left;
-                width:200px;
+                width:140px;
                 text-align:right;
                 padding-right:15px;
             }
@@ -156,15 +158,76 @@ main {
             main section .field-wrapper input.textbox,
             main section .field-wrapper textarea {
                 padding:3px;
-                border:1px solid #ccc;
-                width:300px;
+                border:1px solid #D4D6D4;
+                width:350px;
             }
             
             main section .profile-block-list {
                 min-height:200px;
-                width:600px;
-                border:1px solid #ccc;
-                padding:15px;
+                width:505px;
+                border:1px dashed #D4D6D4;
+                border-radius:7px;                
+                padding:7px;
+                margin-bottom:15px;
+            }
+            
+            main section .profile-block-list.drag-here {
+                border-color:#0C6BA1;
+                background:url("../images/drag-here-bg.png") no-repeat center center Transparent;
+            }
+                
+                main section .profile-block-list .added-block {
+                    padding:5px;
+                    border-radius:3px;
+                    margin-bottom:7px;
+                    background:#0C6BA1;
+                    color:#D4D6D4;
+                    transition:background .5s, color .5s;
+                }
+                
+                    main section .profile-block-list .added-block input {
+                        float:right;
+                        padding:0;
+                        width:50px;
+                    }
+            
+            main section .profile-list {
+                list-style:none;
+                padding:0;
+            }
+                
+                main section .profile-list h3 {
+                    font-weight:normal;
+                    margin-top:0;
+                }
+                
+                    main section .profile-list h3 a {
+                        display:block;
+                        color:#fff;
+                        background:#FF7500;
+                        border-radius:4px;
+                        padding:4px 7px;
+                    }
+                
+                    main section .profile-list h3 a:before {
+                        content:"[+]";
+                        font-family:Monospace;
+                        font-size:12px;
+                        padding-right:5px;
+                        margin-top:4px;
+                        float:left;
+                    }
+                
+                    main section .profile-list h3 a.expanded:before {
+                       content:"[-]";                
+                    }
+                
+                main section .profile-list form {
+                    display:none;
+                }
+                
+            main section .button-save-profile {
+                float:right;
             }
 
 main section.active {
