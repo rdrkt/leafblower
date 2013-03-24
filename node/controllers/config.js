@@ -4,6 +4,8 @@
     //ref self
     _this = this;
 
+    _this.baseApiDomain = 'admin.leafblower.rdrkt.com';
+
     _this.twitterAuth = {
         'username': 'AndyAndyTest',
         'password': 'test123'

@@ -71,26 +71,48 @@ main {
     margin:0 auto;
     width:960px;
 }
-
+    
+    main #profile-list {
+        list-style:none;
+        padding:0;
+        margin:15px auto 10px;
+        width:320px;
+    }
+    
+        main #profile-list li {
+            padding:0 0 5px;
+        }
+        
+            main #profile-list li a {
+                display:block;
+                border-radius:3px;
+                background:#FF7500;
+                color:#00182E;
+                padding:4px 10px;
+            }
+    
     main .block {
-        width:140px;
-        height:140px;
-        padding:5px;
+        width:150px;
+        height:150px;
         margin:5px;
+        box-sizing:border-box;
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        padding:5px;
         background:#D4D6D4;
         color:#00182E;
     }
     
     main .large-block {
-        width:300px;
-        height:300px;
+        width:310px;
+        height:310px;
+        margin:5px;
     }
    
 
 footer {
     margin:0 auto;
     width:960px;
-    padding:10px;
     background:#00182E;
     color:#D4D6D4;
 }
@@ -98,4 +120,5 @@ footer {
     footer p {
         font-size:11px;
         margin:0;
+        padding:10px;
     }
