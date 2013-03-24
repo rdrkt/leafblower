@@ -1,5 +1,7 @@
 <?php
 Configure::write('debug', 0);
+error_reporting(0);
+ 
 class DemoShell extends AppShell {
 	public $uses = array('Block');
 	
@@ -50,7 +52,7 @@ class DemoShell extends AppShell {
 			
 			$this->$function();
 			
-			$sleep = array_rand(1000, 1000000);
+			$sleep = array_rand(100000, 10000000);
 			
 			usleep($sleep);
 		}	
