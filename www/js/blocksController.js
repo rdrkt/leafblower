@@ -5,24 +5,23 @@ var blockController = (function () {
 
     _this.run = function () {
 
-        
+
         return _this;
     };
 
     _this.handleData = function (jsonString) {
-        
-        
-        console.log(jsonString);
+        var json = JSON.parse(jsonString);
+
+        if (eval('_this.' + json.block)) {
+            //console.log(eval('_this.' + json.block));
+        } else {
+            eval('_this.' + json.block + ' = new ' + json.block + '()');
+        }
+
+        eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
+
     };
-
-    _this.updateBlock = function (type, data) {
-
-    };
-
-    _this.loadBlock = function (type) {
-
-    };
-
+    
     return _this.run();
 
 });

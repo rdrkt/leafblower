@@ -12,7 +12,24 @@
         _this.io.sockets.on('connection', function (socket) {
             //room joiner
             socket.on('join room', function (room) {
-                socket.join(room);
+                try {
+                    if (typeof _this.profileBlocks != undefined) {
+                        socket.emit('blockControllers', JSON.stringify(_this.profileBlocks[room]));
+                    }
+                    socket.join(room);
+                } catch(err) {                    
+                    setTimeout(function() {
+                        try {
+                            if (typeof _this.profileBlocks != undefined) {
+                                socket.emit('blockControllers', JSON.stringify(_this.profileBlocks[room]));
+                            }
+                            socket.join(room);
+                        } catch (err) {
+                            console.log('profiles are taking ages to grab');
+                        }
+                    }, 1000); 
+
+                }
             });
         });
 
@@ -38,10 +55,12 @@
             response.on('data', function (json) {
 
                 var profileLists = JSON.parse(json);
+                _this.profileBlocks = {};
 
                 for (i = 0; i < profileLists.length; i++) {
 
                     var profile = profileLists[i];
+                    _this.profileBlocks[profile['_id']] = profile.blocks;
 
                     for (ii = 0; ii < profile.blocks.length; ii++) {
                         var block = profile.blocks[ii];
@@ -51,9 +70,9 @@
                 }
 
             });
+
         }).on('error', function (e) {
             console.log("Got error: " + e.message);
-            _this.getData('/api/live/' + profile['_id'] + '/' + block['_id'], profile['_id'], block['_id'], block['ttl']);
         });
 
     };
@@ -72,7 +91,6 @@
 
             response.setEncoding('utf8');
             response.on('data', function (json) {
-                if (blockId == 'countingMongodb') { console.log(json); console.log(__App.config.baseApiDomain + url); }
                 try {
                     var json = JSON.parse(json);
                     json = { 'block': blockId, 'data': json };

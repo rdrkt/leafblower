@@ -70,6 +70,7 @@ header {
 main {
     margin:0 auto;
     width:960px;
+    height:auto !important;
 }
     
     main #profile-list {
@@ -103,12 +104,57 @@ main {
         color:#00182E;
     }
     
+        main .block .large-only {
+            display:none;
+        }
+    
     main .large-block {
         width:310px;
         height:310px;
         margin:5px;
     }
+    
+        main .large-block .large-only {
+            display:block;
+        }
+        
+        main .large-block .small-only {
+            display:none;
+        }
    
+    main .block h3 {
+        text-align:center;
+        font-size:43px;
+        line-height:1em;
+        margin:0;
+        padding-top:20%;
+        font-weight:normal;
+    }
+   
+        main .block h3 a {
+            color:#00182E;
+            outline:none;
+        }
+        
+        main .block h3 a span {
+            font-size:11px;
+            display:block;
+            padding-top:4px;
+        }
+        
+    main .block p.info-blob {
+        float:left;
+        margin:3px 3px 0 0;
+        padding:3px 5px;
+        color:#333;
+        background:#FF7500;
+        border-radius:3px;
+    }
+        
+    main .large-block h3 {
+        font-size:20px;
+        padding:3px 0;
+    }
 
 footer {
     margin:0 auto;
