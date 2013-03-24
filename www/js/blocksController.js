@@ -10,7 +10,7 @@ var blockController = (function () {
     };
 
     _this.handleData = function (jsonString) {
-        console.log(handleData);
+        console.log(jsonString);
     };
 
     _this.updateBlock = function (type, data) {
