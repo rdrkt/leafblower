@@ -52,11 +52,11 @@ class DemoShell extends AppShell {
 			
 			$this->$function();
 			
-			$sleep = rand(100000, 1000000);
+			$sleep = rand(1, 1000);
 			
-			echo "Sleep for " . $sleep / 1000000 . " seconds\n";
+			echo "Sleep for " . $sleep / 1000 . " seconds\n";
 			
-			usleep($sleep);
+			usleep($sleep * 1000);
 		}	
 		
 	}
