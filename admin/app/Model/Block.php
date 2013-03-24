@@ -1,9 +1,7 @@
 <?php
 class Block extends AppModel {
 	protected function _countingMongodb($options){
-		$db = new Mongo();
-		
-		
+		$db = new MongoClient("mongodb://{$options['host']}");
 		$db = $db->selectDb($options['db']);
 		
 		$collections = $db->listCollections();
