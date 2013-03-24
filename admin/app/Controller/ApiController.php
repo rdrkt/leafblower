@@ -4,7 +4,7 @@ class ApiController extends AppController {
 	public $uses = array('Block', 'User', 'Profile', 'Log');
 	
 	public function beforeFilter(){
-		Configure::write('debug', 0);
+		//Configure::write('debug', 0);
 		$this->autoRender = false;
 		$this->response->header('Access-Control-Allow-Origin: *');
 	}
@@ -70,7 +70,17 @@ class ApiController extends AppController {
 			}
 			
 			return $this->_toJson(false);
-		}		
+		}
+		
+		if($this->request->isDelete()){
+			$id = $data['_id'];
+			
+			
+			
+			$return = $this->Profile->delete($id);
+			
+			$this->_toJson($id);
+		}
 
 		return $this->_toJson(false);
 	}
@@ -160,6 +170,44 @@ class ApiController extends AppController {
 			return $this->_toJson($ret);
 		}
 		
+		return $this->_toJson(false);
+	}
+	
+	public function live( $profileId = '', $blockId = '' ){
+		if($this->request->isGet()){
+			if(empty($profileId) || empty($blockId)){
+				return $this->_toJson(false);
+			}		
+			
+			$profile = $this->Profile->findById($profileId);
+			
+			if(empty($profile)){
+				return $this->_toJson(false);
+			}
+			
+			$profile = $profile['Profile'];
+			
+			$block = $this->Block->findById($blockId);
+			
+			if(empty($block)){
+				return $this->_toJson(false);
+			}
+			
+			$block = $block['Block'];
+			
+			foreach($profile['blocks'] as $userBlock){
+				if($userBlock['_id'] == $blockId){
+					$block = Hash::merge($block, $userBlock);
+				}
+			}
+			
+			$data = $this->Block->live($block);
+			
+			if(!empty($data)){			
+				return $this->_toJson($data);
+			}
+		}
+	
 		return $this->_toJson(false);
 	}
 }
