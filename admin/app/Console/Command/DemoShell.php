@@ -1,5 +1,5 @@
 <?php
-
+Configure::write('debug', 0);
 class DemoShell extends AppShell {
 	public $uses = array('Block');
 	
@@ -11,7 +11,7 @@ class DemoShell extends AppShell {
 		$tube = array_rand($tubes);
 		$tube = $tubes[$tube];
 		
-		$number = rand(1, 1000);
+		$number = rand(1, 10);
 		
 
 		echo "Adding {$number} to {$tube}.\n\n";
@@ -31,7 +31,7 @@ class DemoShell extends AppShell {
 		$animal = array_rand($animals);
 		$animal = $animals[$animal];
 		
-		$number = rand(1, 100);
+		$number = rand(1, 10);
 		
 		echo "Adding {$number} to {$animal}.\n\n";
 		
