@@ -1,3 +1,6 @@
 [submodule "admin/app/Plugin/Mongodb"]
 	path = admin/app/Plugin/Mongodb
 	url = git@github.com:edm-org/cakephp-mongodb.git
+[submodule "admin/app/Plugin/Queue"]
+	path = admin/app/Plugin/Queue
+	url = git@github.com:edm-org/cakephp-queue.git

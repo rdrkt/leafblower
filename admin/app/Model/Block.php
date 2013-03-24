@@ -2,7 +2,9 @@
 class Block extends AppModel {
 	protected function _countingMongodb($options){
 		$db = new Mongo();
-		$db = $db->selectDb('demo');
+		
+		
+		$db = $db->selectDb($options['db']);
 		
 		$collections = $db->listCollections();
 		
@@ -14,6 +16,21 @@ class Block extends AppModel {
 				
 		return $ret;
 	} 
+
+	protected function _countingBeanstalkd($options){
+		$db = new Mongo();
+		$db = $db->selectDb('demo');
+	
+		$collections = $db->listCollections();
+	
+		$ret = array();
+		foreach($collections as $collection){
+			$name = $collection->getName();
+			$ret[] = array('_id' => $name, 'count' => $collection->count(), 'tubestats' => $collection->getIndexInfo());
+		}
+	
+		return $ret;
+	}
 	
 	public function live($block){
 		if(!empty($block)){
