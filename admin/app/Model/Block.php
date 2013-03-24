@@ -1,8 +1,10 @@
 <?php
+App::uses('Queue', 'Job');
+
 class Block extends AppModel {
 	protected function _countingMongodb($options){
-		$db = new Mongo();
-		$db = $db->selectDb('demo');
+		$db = new MongoClient("mongodb://{$options['host']}");
+		$db = $db->selectDb($options['db']);
 		
 		$collections = $db->listCollections();
 		
@@ -14,6 +16,22 @@ class Block extends AppModel {
 				
 		return $ret;
 	} 
+
+	protected function _countingBeanstalkd($options){
+		$queue = ClassRegistry::init('Queue.Job');
+	
+		$tubes = $queue->listTubes();
+	
+		$ret = array();
+		foreach($tubes as $tube){
+			$stats = $queue->statsTube($tube);			
+			$count = $stats['current-jobs-urgent'];
+			
+			$ret[] = array('_id' => $tube, 'count' => $count, 'tubestats' => $stats);
+		}
+	
+		return $ret;
+	}
 	
 	public function live($block){
 		if(!empty($block)){

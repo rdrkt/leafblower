@@ -18,12 +18,20 @@ class ApiController extends AppController {
 			if(empty($id)){
 				//id is empty so list all profiles
 				
+				$ret = Cache::read("profiles");
+
+				if($ret){
+					return $this->_toJson($ret);
+				}
+				
 				$ret = array();
 				$profiles = $this->Profile->find('all');
 
 				foreach($profiles as $profile){
 					$ret[] = $profile['Profile'];
 				}
+				
+				Cache::write("profiles", $ret);
 				
 				return $this->_toJson($ret);
 			}
@@ -193,13 +201,14 @@ class ApiController extends AppController {
 				return $this->_toJson(false);
 			}
 			
-			$block = $block['Block'];
-			
+			$block = $block['Block'];			
 			foreach($profile['blocks'] as $userBlock){
 				if($userBlock['_id'] == $blockId){
 					$block = Hash::merge($block, $userBlock);
 				}
 			}
+			
+			
 			
 			$data = $this->Block->live($block);
 			

@@ -57,10 +57,19 @@ class DATABASE_CONFIG {
 
 	public $default = array(
 		'datasource' => 'Mongodb.MongodbSource',
-		'persistent' => false,
 		'host' => '127.0.0.1',
 		'database' => 'leafblower',
 	);
+	
+public $queue = array(
+  		'datasource' => 'Queue.BeanstalkdSource',
+  		'options' => array(
+  				'servers'=>array(
+  						array('host'=>'localhost'),
+  				),
+  				'oplog_prefix' => 'leaf',
+  		),
+  );
 
 	public $test = array(
 		'datasource' => 'Database/Mysql',
