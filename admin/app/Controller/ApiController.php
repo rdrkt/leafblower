@@ -18,11 +18,11 @@ class ApiController extends AppController {
 			if(empty($id)){
 				//id is empty so list all profiles
 				
-				$ret = Cache::read("profiles");
+				//$ret = Cache::read("profiles");
 
-				if($ret){
-					return $this->_toJson($ret);
-				}
+				//if($ret){
+				//	return $this->_toJson($ret);
+				//}
 				
 				$ret = array();
 				$profiles = $this->Profile->find('all');
@@ -31,7 +31,7 @@ class ApiController extends AppController {
 					$ret[] = $profile['Profile'];
 				}
 				
-				Cache::write("profiles", $ret);
+				//Cache::write("profiles", $ret);
 				
 				return $this->_toJson($ret);
 			}
@@ -70,7 +70,7 @@ class ApiController extends AppController {
 			}
 			
 			$data = array_merge($profile, $data);
-			
+
 			$data = $this->Profile->save($data);
 			
 			if(!empty($data)){
