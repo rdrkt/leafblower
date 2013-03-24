@@ -52,7 +52,7 @@ class DemoShell extends AppShell {
 			
 			$this->$function();
 			
-			$sleep = array_rand(100000, 1000000);
+			$sleep = rand(100000, 1000000);
 			
 			echo "Sleep for " . $sleep / 1000000 . " seconds\n";
 			
