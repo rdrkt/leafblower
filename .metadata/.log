@@ -1,0 +1,12 @@
+!SESSION 2013-03-25 22:11:40.431 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_24
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86 -data /home/jpstev/workspace/leafblower
+
+!ENTRY org.eclipse.ui 4 4 2013-03-25 22:12:25.761
+!MESSAGE Invalid preference page path: HTML Syntax
+
+!ENTRY org.eclipse.ui 4 4 2013-03-25 22:12:25.764
+!MESSAGE Invalid preference page path: XML Syntax
