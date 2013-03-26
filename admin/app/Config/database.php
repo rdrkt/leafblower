@@ -63,12 +63,6 @@ class DATABASE_CONFIG {
 	
 public $queue = array(
   		'datasource' => 'Queue.BeanstalkdSource',
-  		'options' => array(
-  				'servers'=>array(
-  						array('host'=>'localhost'),
-  				),
-  				'oplog_prefix' => 'leaf',
-  		),
   );
 
 	public $test = array(
