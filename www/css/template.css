@@ -142,15 +142,26 @@ main {
             display:block;
             padding-top:4px;
         }
-        
+       
     main .block p.info-blob {
-        float:left;
-        margin:3px 3px 0 0;
-        padding:3px 5px;
-        color:#333;
-        background:#FF7500;
-        border-radius:3px;
+        background: none repeat scroll 0 0 #FF7500;
+        border-radius: 3px 3px 3px 3px;
+        color: #333333;
+        float: left;
+        margin: 5px;
+        padding: 3px;
+        width: 84px;
+        height: 45px;
+        text-align: center;
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        -webkit-box-sizing:border-box; /* Safari */
     }
+    
+        main .block p.info-blob span {
+            display: block;
+            font-weight: normal;
+        }
         
     main .large-block h3 {
         font-size:20px;
