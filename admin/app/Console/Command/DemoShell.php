@@ -1,6 +1,6 @@
 <?php
-Configure::write('debug', 0);
-error_reporting(0);
+Configure::write('debug', 2);
+#error_reporting(0);
  
 class DemoShell extends AppShell {
 	public $uses = array('Block');
