@@ -18,9 +18,9 @@ class Block extends AppModel {
 	} 
 
 	protected function _countingBeanstalkd($options){
-		//$queue = ClassRegistry::init('Queue.Job');
+		$queue = ClassRegistry::init('Queue.Job');
 	
-		$tubes = array();//$queue->listTubes();
+		$tubes = $queue->listTubes();
 	
 		$ret = array();
 		foreach($tubes as $tube){
