@@ -6,7 +6,7 @@ var viewManager = (function () {
 
     _this.run = function () {
 
-        _this.socket = io.connect('http://localhost:8080');
+        _this.socket = io.connect('http://leafblower.rdrkt.com:8080');
         _this.loadEvents();
         _this.reshapePage();
         _this.blockController = new blockController();
@@ -59,6 +59,8 @@ var viewManager = (function () {
         //data throughput from Node
         _this.socket.on('data', function (data) {
             _this.blockController.handleData(data);
+            $('footer').after('<p class="log-block" style="margin:0 auto; width:960px; font-family:monospace;">' + data.substr(0, 116) + ' ...</p>');
+            $('.log-block:nth(10)').remove();
         });
 
         //block delete event
