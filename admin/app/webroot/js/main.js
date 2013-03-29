@@ -178,8 +178,6 @@ var adminCp = (function () {
         $(document).on('click', '.delete-profile', function (e) {
             e.preventDefault();
 
-            _this.deleteProfile(profileId);
-
             var profileId = $(this).data('profileid');
             $.ajax({
                 type: 'DELETE',
