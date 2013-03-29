@@ -2,6 +2,9 @@ var adminCp = (function () {
 
     var _this = this;
 
+    //config base url
+    _this.baseUrl = 'http://admin.leafblower.rdrkt.com';
+
     _this.run = function () {
 
         _this.fixDom();
@@ -25,7 +28,7 @@ var adminCp = (function () {
         //empty out list
         $listWrapper.empty();
 
-        $.get('http://admin.leafblower.rdrkt.com/api/block', function (data) {
+        $.get(_this.baseUrl + '/api/block', function (data) {
             //var data = JSON.parse('[{ "name": "Counting", "type": "counting", "blocks": [{ "_id": "countingBeanstalkd", "type": "counting", "title": "Beanstalkd Tube Counting", "description": "Block for visualizing the size of tubes and the workers that are watching them", "ttl": 1000, "options": { "value1": "default", "value2": "default2"} }, { "_id": "countingMongodb", "type": "counting", "title": "Mongodb Collection Counting", "description": "Block for visualizing the size of collections and their indexes", "ttl": 1000, "options": { "value1": "default", "value2": "default2"}}] }, { "name": "Geospacial", "type": "geospacial", "blocks": [{ "_id": "geoCheckIns", "type": "geospacial", "title": "Checkin visualiser", "description": "Block for visualizing the checkins occuring in your app bound by a circle centered at a given lat\/lon and radius", "ttl": 5000, "options": { "lat": -33.873651, "lon": -151.2068896, "radius": 50, "collection": "checkins"}}] }, { "name": "Filesystem", "type": "filesystem", "blocks": [{ "_id": "gridfsView", "type": "filesystem", "title": "Mongodb GridFS Viewer", "description": "View all the files in your GridFS collection as if they are in a physical storage volume", "ttl": 1000, "options": []}]}]'); ;
 
             $.each(JSON.parse(data), function (key, type) {
@@ -65,7 +68,7 @@ var adminCp = (function () {
     _this.loadProfileList = function () {
         _this.showLoader();
 
-        $.get('http://admin.leafblower.rdrkt.com/api/profile', function (data) {
+        $.get(_this.baseUrl + '/api/profile', function (data) {
 
             $('#list-profiles ul').empty();
 
@@ -95,6 +98,7 @@ var adminCp = (function () {
                 });
 
                 profileMarkup += '</div>';
+                profileMarkup += '<a href="" class="delete-profile" data-profileid="' + profile['_id'] + '" title="Delete ' + profile['name'] + '">Delete ' + profile['name'] + '</a>';
                 profileMarkup += '<input type="hidden" class="hidden-profile-id" value="' + profile['_id'] + '" name="hdn' + prefix + 'ProfileId" />';
                 profileMarkup += '<input type="submit" name="button-save-profile" class="button-save-profile" value="Update profile" />';
                 profileMarkup += '</form>';
@@ -114,10 +118,6 @@ var adminCp = (function () {
 
             _this.hideLoader();
         }, 'json');
-    };
-
-    _this.saveProfile = function () {
-
     };
 
     _this.loadEvents = function () {
@@ -164,13 +164,31 @@ var adminCp = (function () {
 
             console.log(profile);
 
-            $.post('http://admin.leafblower.rdrkt.com/api/profile', profile, function () {
+            $.post(_this.baseUrl + '/api/profile', profile, function () {
 
                 alert('Profile saved');
                 _this.hideLoader();
                 _this.loadProfileList();
 
             }, 'json');
+
+        });
+
+        //delete profile
+        $(document).on('click', '.delete-profile', function (e) {
+            e.preventDefault();
+
+            _this.deleteProfile(profileId);
+
+            var profileId = $(this).data('profileid');
+            $.ajax({
+                type: 'DELETE',
+                url: _this.baseUrl + '/profile/' + profileId,
+                success: function (data) {
+                    console.log('deleted?');
+                    console.log(data);
+                }
+            });
 
         });
 
