@@ -162,12 +162,11 @@ var adminCp = (function () {
             profile['description'] = $form.find('.profile-description').val();
             profile['blocks'] = JSON.parse(decodeURI($form.find('.blockJson').val()));
 
-            console.log(profile);
-
             $.post(_this.baseUrl + '/api/profile', profile, function () {
 
                 alert('Profile saved');
                 _this.hideLoader();
+                $('nav a:last-child').click();
                 _this.loadProfileList();
 
             }, 'json');
@@ -178,13 +177,16 @@ var adminCp = (function () {
         $(document).on('click', '.delete-profile', function (e) {
             e.preventDefault();
 
+            _this.showLoader();
+
             var profileId = $(this).data('profileid');
             $.ajax({
                 type: 'DELETE',
                 url: _this.baseUrl + '/profile/' + profileId,
                 success: function (data) {
-                    console.log('deleted?');
-                    console.log(data);
+                    alert('Profile succesfully deleted');
+                    _this.hideLoader();
+                    _this.loadProfileList();
                 }
             });
 
