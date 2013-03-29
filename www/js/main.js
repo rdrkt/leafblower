@@ -6,7 +6,7 @@ var viewManager = (function () {
 
     _this.run = function () {
 
-        _this.socket = io.connect('http://leafblower.rdrkt.com:8080');
+        _this.socket = io.connect('http://localhost:8080');
         _this.loadEvents();
         _this.reshapePage();
         _this.blockController = new blockController();
@@ -41,39 +41,31 @@ var viewManager = (function () {
             _this.reshapePage();
         });
 
+        //on connect, join profile "room"
         _this.socket.on('connect', function () {
-            //_this.socket.join(document.location.hash.replace('#', ''));
             _this.socket.emit('join', document.location.hash.replace('#', ''));
-            _this.joinInterval = setInterval(function () { _this.socket.emit('join', document.location.hash.replace('#', '')); }, 500);
         });
 
+        //feedback that a profile room is joined
         _this.socket.on('joined', function (room) {
             console.log('Joined ' + room);
-            clearTimeout(_this.joinInterval);
         });
 
+        //feedback that connection is lost
         _this.socket.on('disconnect', function () {
             console.log('socket failure, lost connection');
         });
 
+        //data throughput from Node
         _this.socket.on('data', function (data) {
             _this.blockController.handleData(data);
         });
 
-        _this.socket.on('blockControllers', function (blockControllers) {
-
-            blockControllers = JSON.parse(blockControllers);
-
-            /*for (i = 0; i < blockControllers.length; i++) {
-            var h = document.getElementsByTagName('head')[0],
-            s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = '/js/blocks/' + blockControllers[i]['_id'] + '.js';
-            h.appendChild(s);
-            }*/
-
+        //block delete event
+        _this.socket.on('blockDelete', function (blockId) {
+            _this.blockController.handleDelete(blockId);
         });
+
     };
 
     return _this.run();

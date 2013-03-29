@@ -12,16 +12,18 @@ var blockController = (function () {
     _this.handleData = function (jsonString) {
         var json = JSON.parse(jsonString);
 
-        if (eval('_this.' + json.block)) {
-            //console.log(eval('_this.' + json.block));
-        } else {
+        if (!eval('_this.' + json.block)) {
             eval('_this.' + json.block + ' = new ' + json.block + '()');
         }
 
         eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
 
     };
-    
+
+    _this.handleDelete = function (blockId) {
+        eval('_this.' + blockId + '.deleteBlock()');
+    };
+
     return _this.run();
 
 });

@@ -22,6 +22,10 @@ var countingBeanstalkd = (function () {
         $('#countingBeanstalkd').find('h3').find('a').attr('title', newTotal + ' Tubes').html(newTotal + '<span>tubes</span>');
     };
 
+    _this.deleteBlock = function () {
+        $('#countingBeanstalkd').remove();
+    };
+
     _this.loadEvents = function () {
 
         if ($('#countingBeanstalkd').length < 1) { $('main').append('<div class="block" id="countingBeanstalkd"><h3><a href="" title=""></a></h3><div class="large-only"></div></div>'); }

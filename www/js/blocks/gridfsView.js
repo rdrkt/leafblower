@@ -4,7 +4,6 @@ var gridfsView = (function () {
     var _this = this;
 
     _this.run = function () {
-        _this.loadEvents();
 
         return _this;
     };
@@ -14,8 +13,8 @@ var gridfsView = (function () {
         console.log(data);
     };
 
-    _this.loadEvents = function () {
-        
+    _this.deleteBlock = function () {
+        //perform self removal and cleanup
     };
 
     return _this;

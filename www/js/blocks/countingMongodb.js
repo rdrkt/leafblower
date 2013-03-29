@@ -23,6 +23,10 @@ var countingMongodb = (function () {
         $('#countingMongodb').find('h3').find('a').attr('title', newTotal + ' Documents').html(newTotal + '<span>documents</span>');
     };
 
+    _this.deleteBlock = function () {
+        $('#countingMongodb').remove();
+    };
+
     _this.loadEvents = function () {
         if ($('#countingMongodb').length < 1) { $('main').append('<div class="block" id="countingMongodb"><h3><a href="" title=""></a></h3><div class="large-only"></div></div>'); }
 

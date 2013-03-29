@@ -57,8 +57,7 @@
                     for (ii = 0; ii < profile.blocks.length; ii++) {
                         var block = profile.blocks[ii];
                         //set the timeout into cache list (so it could be cleared)
-                        _this.queueProcessor.add(function () { _this.getData('/api/live/' + profile['_id'] + '/' + block['_id'], profile['_id'], block['_id'], block['ttl']); }, block['ttl']);
-
+                        _this.getData('/api/live/' + profile['_id'] + '/' + block['_id'], profile['_id'], block['_id'], block['ttl']);
                     }
 
                 }
@@ -87,9 +86,8 @@
             method: 'GET',
             path: url
         };
-        
-        http.get(apiOptions, function (response) {
 
+        http.get(apiOptions, function (response) {
             response.setEncoding('utf8');
             response.on('data', function (json) {
                 try {
@@ -111,6 +109,7 @@
     //only broadcast if there is someone in that profile logged in and viewing it
     _this.broadcastData = function (profileRoomId, jsonObject) {
         if (_this.io.sockets.clients(profileRoomId).length > 0) {
+            //using .['in'] rather than .in as JS lint spacks out.
             _this.io.sockets['in'](profileRoomId).emit('data', JSON.stringify(jsonObject));
         }
     };
@@ -126,25 +125,14 @@
 
         add: function (callback, milliseconds) {
             this.list.push([callback, milliseconds]);
-            console.log('add/readd');
-        },
-
-        remove: function (queueKey) {
-            var newArray = new Array();
-            for (var i = 0; i < this.list.length; i++) {
-                if (i != queueKey) {
-                    newArray.push(this.list[i]);
-                }
-            }
-            this.list = newArray;
         },
 
         execute: function () {
-            //console.log(this.list.length);
             for (i = 0; i < this.list.length; i++) {
+
                 if ((this.list[i][1] - __App.config.tickerSpeed) < 1) {
                     this.list[i][0]();
-                    this.remove(i);
+                    this.list.splice(i, 1);
                 } else {
                     this.list[i][1] = parseInt(this.list[i][1] - 100);
                 }
