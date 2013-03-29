@@ -42,7 +42,18 @@ var viewManager = (function () {
         });
 
         _this.socket.on('connect', function () {
-            _this.socket.emit('join room', document.location.hash.replace('#', ''));
+            //_this.socket.join(document.location.hash.replace('#', ''));
+            _this.socket.emit('join', document.location.hash.replace('#', ''));
+            _this.joinInterval = setInterval(function () { _this.socket.emit('join', document.location.hash.replace('#', '')); }, 500);
+        });
+
+        _this.socket.on('joined', function (room) {
+            console.log('Joined ' + room);
+            clearTimeout(_this.joinInterval);
+        });
+
+        _this.socket.on('disconnect', function () {
+            console.log('socket failure, lost connection');
         });
 
         _this.socket.on('data', function (data) {
@@ -54,12 +65,12 @@ var viewManager = (function () {
             blockControllers = JSON.parse(blockControllers);
 
             /*for (i = 0; i < blockControllers.length; i++) {
-                var h = document.getElementsByTagName('head')[0],
-                s = document.createElement('script');
-                s.type = 'text/javascript';
-                s.async = true;
-                s.src = '/js/blocks/' + blockControllers[i]['_id'] + '.js';
-                h.appendChild(s);
+            var h = document.getElementsByTagName('head')[0],
+            s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = '/js/blocks/' + blockControllers[i]['_id'] + '.js';
+            h.appendChild(s);
             }*/
 
         });
