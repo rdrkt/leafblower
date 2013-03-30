@@ -3,6 +3,7 @@
 
     var _this = this;
 
+    //store block data temporarily to stop flooding the API when 1 block is in 50000 profiles
     _this.blockCache = {};
 
     //constructor
@@ -13,6 +14,7 @@
 
         //server connection listener
         _this.io.sockets.on('connection', function (socket) {
+            console.log('connection....');
             //room joiner
             socket.on('join', function (room) {
                 console.log('join received');
@@ -70,6 +72,8 @@
                 }, __App.config.processQueueRestart);
             });
 
+
+
         }).on('error', function (e) {
             console.log("Got error: " + e.message);
         });
@@ -79,32 +83,83 @@
     //fetch data and emit to profile viewers
     _this.getData = function (url, profileId, blockId, ttl) {
 
-        var http = require('http');
+        //no point grabbing data for a block that's not in use
+        if (_this.io.sockets.clients(profileId).length > 0) {
 
-        var apiOptions = {
-            host: __App.config.baseApiDomain,
-            method: 'GET',
-            path: url
-        };
+            //console.log(_this.blockCache[profileId + '-' + blockId]);
 
-        http.get(apiOptions, function (response) {
-            response.setEncoding('utf8');
-            response.on('data', function (json) {
-                try {
-                    var json = JSON.parse(json);
-                    json = { 'block': blockId, 'data': json };
-                    _this.broadcastData(profileId, json);
-                } catch (err) {
-                    console.log(err);
+            //check the cache for this block.
+            if (!_this.blockCache[profileId + '-' + blockId]) {
+
+                var http = require('http');
+
+                var apiOptions = {
+                    host: __App.config.baseApiDomain,
+                    method: 'GET',
+                    path: url
+                };
+
+                //grab JSON data over http
+                http.get(apiOptions, function (response) {
+                    response.setEncoding('utf8');
+                    response.on('data', function (json) {
+                        try {
+                            var json = JSON.parse(json);
+                            json = { 'block': blockId, 'data': json };
+                            _this.broadcastData(profileId, json);
+
+                            //add data to the cache, and set a timeout to delete the cache in 50% of ttl
+                            //so the same profile viewer doesn't get the same cached item
+                            _this.blockCache[profileId + '-' + blockId] = json;
+                            _this.queueProcessor.add(function () { delete _this.blockCache[profileId + '-' + blockId]; }, parseInt(ttl / 2));
+
+                        } catch (err) {
+                            console.log(err);
+                        }
+
+                        //and add back to queue
+                        _this.queueProcessor.add(function () {
+                            _this.getData(url, profileId, blockId, ttl);
+                        }, ttl);
+                    });
+
+                });
+
+                //if cache exists, use.
+            } else {
+
+                //incase the cache managed to get dropped in the last processing tick
+                var cache = _this.blockCache[profileId + '-' + blockId];
+
+                //if it was dropped (undefined), just re-run the getData.
+                if (!cache) {
+                    _this.getData(url, profileId, blockId, ttl);
+                } else {
+
+                    //emit cached version
+                    _this.broadcastData(profileId, cache);
+
+                    //and add back to queue
+                    _this.queueProcessor.add(function () {
+                        _this.getData(url, profileId, blockId, ttl);
+                    }, ttl);
+
                 }
+            }
 
-                //and add back to queue
-                _this.queueProcessor.add(function () { _this.getData(url, profileId, blockId, ttl); }, ttl);
-            });
+            //if noone to receive currently, just queue to recheck on the given ttl
+        } else {
 
-        });
+            //and add back to queue
+            _this.queueProcessor.add(function () {
+                _this.getData(url, profileId, blockId, ttl);
+            }, ttl);
 
-    };
+        }
+    }
+
+
+
 
     //only broadcast if there is someone in that profile logged in and viewing it
     _this.broadcastData = function (profileRoomId, jsonObject) {

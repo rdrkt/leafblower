@@ -6,7 +6,7 @@ var viewManager = (function () {
 
     _this.run = function () {
 
-        _this.socket = io.connect('http://leafblower.rdrkt.com:8080');
+        _this.socket = io.connect('http://localhost:8080');
         _this.loadEvents();
         _this.reshapePage();
         _this.blockController = new blockController();
@@ -48,12 +48,14 @@ var viewManager = (function () {
 
         //feedback that a profile room is joined
         _this.socket.on('joined', function (room) {
-            console.log('Joined ' + room);
+            var date = new Date()
+            console.log('Joined ' + room + ' [' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + ' ' + (date.getDate() + 1) + '/' + date.getMonth() + '/' + date.getFullYear() + ']');
         });
 
         //feedback that connection is lost
         _this.socket.on('disconnect', function () {
-            console.log('socket failure, lost connection');
+            var date = new Date()
+            console.log('socket failure, lost connection [' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + ' ' + (date.getDate() + 1) + '/' + date.getMonth() + '/' + date.getFullYear() + ']');
         });
 
         //data throughput from Node
