@@ -230,6 +230,8 @@ var adminCp = (function () {
                     blockList[key]['ttl'] = parseInt($this.val());
                 }
             });
+
+            $jsonInput.val(encodeURI(JSON.stringify(blockList)));
         });
 
     };
