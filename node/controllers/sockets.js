@@ -75,7 +75,14 @@
 
 
         }).on('error', function (e) {
-            console.log("Got error: " + e.message);
+            console.log('[Profile List Err] : ' + e.message);
+
+            //we don't want lag buildup or profile updates to require node.js restart, check profiles and restart queue periodically
+            _this.queueProcessor.add(function () {
+                _this.queueProcessor.stop();
+                _this.queueProcessor.start();
+                _this.loadProfiles();
+            }, 1000);
         });
 
     };
@@ -123,6 +130,13 @@
                         }, ttl);
                     });
 
+                }).on('error', function (e) {
+                    console.log('[Block Err] : ' + e.message);
+
+                    //just add back to queue to not overwhelm API
+                    _this.queueProcessor.add(function () {
+                        _this.getData(url, profileId, blockId, ttl);
+                    }, ttl);
                 });
 
                 //if cache exists, use.
