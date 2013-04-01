@@ -70,6 +70,12 @@ var viewManager = (function () {
             _this.blockController.handleDelete(blockId);
         });
 
+        //profile delete event - send back to list page
+        _this.socket.on('profileDelete', function (d) {
+            alert('The profile you are currently viewing has been removed, you will now be redirected to the profile listing page');
+            document.location.href = 'list.html';
+        });
+
     };
 
     return _this.run();

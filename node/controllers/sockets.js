@@ -6,6 +6,9 @@
     //store block data temporarily to stop flooding the API when 1 block is in 50000 profiles
     _this.blockCache = {};
 
+    //where profiles are stored
+    _this.profileBlocks = null;
+
     //constructor
     _this.run = function () {
 
@@ -43,26 +46,17 @@
             path: '/api/profile'
         };
 
+        var start = new Date();
         http.get(apiOptions, function (response) {
 
             response.setEncoding('utf8');
             response.on('data', function (json) {
+                
+                //for debuggin
+                //console.log('[Profile list] Request took:', new Date() - start, 'ms');
 
-                var profileLists = JSON.parse(json);
-                _this.profileBlocks = {};
-
-                for (i = 0; i < profileLists.length; i++) {
-
-                    var profile = profileLists[i];
-                    _this.profileBlocks[profile['_id']] = profile.blocks;
-
-                    for (ii = 0; ii < profile.blocks.length; ii++) {
-                        var block = profile.blocks[ii];
-                        //set the timeout into cache list (so it could be cleared)
-                        _this.getData('/api/live/' + profile['_id'] + '/' + block['_id'], profile['_id'], block['_id'], block['ttl']);
-                    }
-
-                }
+                //run the profile/blocks setter/handler
+                _this.setProfiles(json);
 
                 //we don't want lag buildup or profile updates to require node.js restart, check profiles and restart queue periodically
                 _this.queueProcessor.add(function () {
@@ -87,6 +81,61 @@
 
     };
 
+    //setup profiles, emit block deletions, startup block api requests
+    _this.setProfiles = function (json) {
+
+        var profileLists = JSON.parse(json);
+
+        //store old profile blocks for deletions
+        var oldProfileBlocks = _this.profileBlocks;
+
+        //reset profile blocks
+        _this.profileBlocks = {};
+
+        for (i = 0; i < profileLists.length; i++) {
+
+            var profile = profileLists[i];
+            _this.profileBlocks[profile['_id']] = profile.blocks;
+
+            for (ii = 0; ii < profile.blocks.length; ii++) {
+                var block = profile.blocks[ii];
+                //set the timeout into cache list (so it could be cleared)
+                _this.getData('/api/live/' + profile['_id'] + '/' + block['_id'], profile['_id'], block['_id'], block['ttl']);
+            }
+
+        }
+
+        //compare existing profiles (if this isn't the first run)
+        if (typeof oldProfileBlocks == 'object') {
+            _this.emitBlockDeletions(oldProfileBlocks);
+        }
+
+    };
+
+    //compare last fetched profile list vs. current for block differences, emit delete request if blocks are missing
+    _this.emitBlockDeletions = function (oldProfileList) {
+
+        //loop through old profile comparing against new
+        for (var oldProfile in oldProfileList) {
+
+            //has the entire profile been deleted?
+            if (_this.profileBlocks[oldProfile]) {
+
+                //loop through the blocks in the old profile
+                for (i = 0; i < oldProfileList[oldProfile].length; i++) {
+                    //block isn't the same, emit delete
+                    if (oldProfileList[oldProfile][i]['_id'] != _this.profileBlocks[oldProfile][i]['_id']) {
+                        _this.broadcastData('blockDelete', oldProfile, { 'id': oldProfileList[oldProfile][i]['_id'] });
+                    }
+                }
+
+            } else {
+                _this.broadcastData('deleteProfile', oldProfile, { 'removed': true });
+            }
+
+        }
+    };
+
     //fetch data and emit to profile viewers
     _this.getData = function (url, profileId, blockId, ttl) {
 
@@ -107,13 +156,19 @@
                 };
 
                 //grab JSON data over http
+                var start = new Date();
                 http.get(apiOptions, function (response) {
                     response.setEncoding('utf8');
                     response.on('data', function (json) {
+
+                        //for debugging
+                        //console.log('[' + profileId + ' - ' + blockId + '] Request took:', new Date() - start, 'ms');
+
+
                         try {
                             var json = JSON.parse(json);
                             json = { 'block': blockId, 'data': json };
-                            _this.broadcastData(profileId, json);
+                            _this.broadcastData('data', profileId, json);
 
                             //add data to the cache, and set a timeout to delete the cache in 50% of ttl
                             //so the same profile viewer doesn't get the same cached item
@@ -151,7 +206,7 @@
                 } else {
 
                     //emit cached version
-                    _this.broadcastData(profileId, cache);
+                    _this.broadcastData('data', profileId, cache);
 
                     //and add back to queue
                     _this.queueProcessor.add(function () {
@@ -174,12 +229,11 @@
 
 
 
-
     //only broadcast if there is someone in that profile logged in and viewing it
-    _this.broadcastData = function (profileRoomId, jsonObject) {
+    _this.broadcastData = function (msgType, profileRoomId, jsonObject) {
         if (_this.io.sockets.clients(profileRoomId).length > 0) {
             //using .['in'] rather than .in as JS lint spacks out.
-            _this.io.sockets['in'](profileRoomId).emit('data', JSON.stringify(jsonObject));
+            _this.io.sockets['in'](profileRoomId).emit(msgType, JSON.stringify(jsonObject));
         }
     };
 
