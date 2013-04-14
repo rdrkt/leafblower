@@ -25,7 +25,7 @@
 html,body { height:100%; }
 
 body {
-    background:url("../images/body-bg.gif") no-repeat 0 center #e9f2f9;
+    background:url("../images/body-bg.gif") no-repeat center 0 #e9f2f9;
     color:#000;
     font-family:Oxygen, Verdana, sans-serif;
     font-weight:400;
@@ -74,34 +74,43 @@ header {
     
     header .title {
         float:left;
-        color:#D4D6D4;
         font-size:34px;
-        margin:0;
+        font-weight:300;
         padding:10px;
-        font-weight:normal;
     }
     
     header nav {
         float:right;
     }
     
-        header nav a,
-        header nav a:active {
+        header nav a {
             float:right;
             display:table-cell;
             width:35px;
             height:35px;
-            background:url("../images/sprite-nav.png") no-repeat 0 0 #fff;
+            background:url("../images/sprite-nav.png") no-repeat 10px 6px #FFFFFF;
             transition:background-color .5s;
         }
         
-        header nav a:hover {
+        header nav a:hover,
+        header nav a:active {
             background:#61ae24;
+            outline:none;
         }
+
+        header nav .user-manager { background-position:10px 6px; }
+        header nav .user-manager:hover { background-position:10px -24px; }
+        header nav .add-profile { background-position:-30px 6px; }
+        header nav .add-profile:hover { background-position:-30px -24px; }
+        header nav .list-profiles { background-position:-71px 6px; }
+        header nav .list-profiles:hover { background-position:-71px -27px; }
+
 
 /* Main content wrapper */
 
 main {
+    margin:0 auto;
+    width:960px;
     color:#333;
     position:relative;
 }
@@ -278,12 +287,14 @@ main section.active {
     }
 
 footer {
-    padding:10px;
+    margin:0 auto;
+    width:960px;
     background:#00182E;
     color:#D4D6D4;
 }
 
     footer p {
+        padding:0 10px;
         font-size:11px;
         margin:0;
     }
