@@ -85,11 +85,12 @@ header {
     
         header nav a {
             float:right;
-            display:table-cell;
+            margin-left:20px;
             width:35px;
             height:35px;
             background:url("../images/sprite-nav.png") no-repeat 10px 6px #FFFFFF;
             transition:background-color .5s;
+            text-indent:-999em;
         }
         
         header nav a:hover,
@@ -134,27 +135,21 @@ main {
                 padding:10px 0 0;
             }
             
-                main aside #block-menu li a {
+                main aside #block-menu > li > a {
                     display:block;
-                    outline:none;
+                    font-size:24px;
+                    font-weight:300;
+                    padding:20px 0 20px 40px;
+                    background:url("../images/menu-closed.gif") no-repeat 0 25px;
                 }
                 
-                main aside #block-menu > li > a:before {
-                    content:"[+]";
-                    font-family:Monospace;
-                    font-size:12px;
-                    padding-right:5px;
-                    margin-top:2px;
-                    float:left;
-                }
-                
-                main aside #block-menu li a.open:before {
-                    content:"[-]";
+                main aside #block-menu > li > a.open {
+                    background:url("../images/menu-open.gif") no-repeat 0 4px;
                 }
             
                 main aside #block-menu li ul {
                     display:none;
-                    margin:10px 0 0 10px;
+                    margin:10px 0 0;
                 }
                 
                 main aside #block-menu li ul.open {
@@ -170,18 +165,16 @@ main {
                     }
                     
                         main aside #block-menu li ul li a {
-                            padding:5px;
-                            border-radius:3px;
-                            background:#0C6BA1;
-                            color:#00182E;
-                            transition:background .5s, color .5s;
+                            border-left:3px solid #182945;
+                            padding:24px 15px;
+                            font-size:18px;
+                            display:block;
                             cursor:move;
                         }
                         
                         main aside #block-menu li ul li a:hover,
                         main aside #block-menu li ul li a:active {
-                            background:#00182E;
-                            color:#0C6BA1;
+                            background:url("../images/dragger-bg.gif") no-repeat 230px 25px #fff;
                         }
     
     /* Content styling */
@@ -294,7 +287,7 @@ footer {
 }
 
     footer p {
-        padding:0 10px;
-        font-size:11px;
+        padding:10px 15px;
+        font-size:14px;
         margin:0;
     }

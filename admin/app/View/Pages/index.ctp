@@ -21,7 +21,7 @@
 		<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
 
         <header class="clearfix">
-			<a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/leafblower-logo.gif" alt="Leafblower" /></a>
+			<a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/leafblower-logo.png" alt="Leafblower" /></a>
             <nav>
 				<a href="#user-manager" title="User manager" class="users">
 					User manager
