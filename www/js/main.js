@@ -6,7 +6,7 @@ var viewManager = (function () {
 
     _this.run = function () {
 
-        _this.socket = io.connect('http://leafblower.rdrkt.com:8080');
+        _this.socket = io.connect('http://localhost:8080');
         _this.loadEvents();
         _this.reshapePage();
         _this.blockController = new blockController();

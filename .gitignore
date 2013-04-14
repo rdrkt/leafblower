@@ -13,3 +13,4 @@ app/[Cc]onfig/database.php
 .settings/*
 .buildpath
 .project
+*.suo

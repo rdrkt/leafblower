@@ -21,13 +21,16 @@
 		<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
 
         <header class="clearfix">
-			<h1>Leafblower</h1>
+			<a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/logo-leafblower.gif" alt="Leafblower" /></a>
             <nav>
-				<a href="#add-profile" title="Add profile">
-					<img src="images/add-profile.png" alt="Add profile">
+				<a href="#user-manager" title="User manager" class="users">
+					User manager
 				</a>
-				<a href="#list-profiles" title="List profile">
-					<img src="images/list-profiles.png" alt="List profile">
+				<a href="#add-profile" title="Add profile" class="add-profile">
+					Add profile
+				</a>
+				<a href="#list-profiles" title="List profile" class="list">
+					List profile
 				</a>
 			</nav>
         </header>
