@@ -23,13 +23,13 @@
         <header class="clearfix">
 			<a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/leafblower-logo.png" alt="Leafblower" /></a>
             <nav>
-				<a href="#user-manager" title="User manager" class="users">
+				<a href="#user-manager" title="User manager" class="user-manager">
 					User manager
 				</a>
 				<a href="#add-profile" title="Add profile" class="add-profile">
 					Add profile
 				</a>
-				<a href="#list-profiles" title="List profile" class="list">
+				<a href="#list-profiles" title="List profile" class="list-profiles">
 					List profile
 				</a>
 			</nav>

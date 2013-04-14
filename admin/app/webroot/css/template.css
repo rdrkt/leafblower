@@ -68,7 +68,7 @@ a {
 /* Header */
 
 header {
-    margin:0 auto;
+    margin:20px auto;
     width:960px;
 }
     
@@ -85,11 +85,11 @@ header {
     
         header nav a {
             float:right;
-            margin-left:20px;
+            margin:20px 0 0 20px;
             width:35px;
             height:35px;
             background:url("../images/sprite-nav.png") no-repeat 10px 6px #FFFFFF;
-            transition:background-color .5s;
+            transition:background-color .5s, background-position .5s;
             text-indent:-999em;
         }
         
@@ -99,12 +99,12 @@ header {
             outline:none;
         }
 
-        header nav .user-manager { background-position:10px 6px; }
-        header nav .user-manager:hover { background-position:10px -24px; }
-        header nav .add-profile { background-position:-30px 6px; }
-        header nav .add-profile:hover { background-position:-30px -24px; }
-        header nav .list-profiles { background-position:-71px 6px; }
-        header nav .list-profiles:hover { background-position:-71px -27px; }
+        header nav a.user-manager { background-position:10px 6px; }
+        header nav a.user-manager:hover { background-position:10px -24px; }
+        header nav a.add-profile { background-position:-30px 6px; }
+        header nav a.add-profile:hover { background-position:-30px -24px; }
+        header nav a.list-profiles { background-position:-71px 6px; }
+        header nav a.list-profiles:hover { background-position:-71px -27px; }
 
 
 /* Main content wrapper */
