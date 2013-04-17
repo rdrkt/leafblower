@@ -182,7 +182,7 @@ var adminCp = (function () {
             var profileId = $(this).data('profileid');
             $.ajax({
                 type: 'GET',
-                url: _this.baseUrl + '/api/profile/delete' + profileId,
+                url: _this.baseUrl + '/api/profile/delete/' + profileId,
                 success: function (data) {
                     alert('Profile succesfully deleted');
                     _this.hideLoader();
