@@ -13,44 +13,34 @@ class ApiController extends AppController {
 		return json_encode($array);		
 	}	
 	
-	public function profile( $id = "" ){
-		if($this->request->isGet()){
-			if(empty($id)){
-				//id is empty so list all profiles
-				
-				//$ret = Cache::read("profiles");
-
-				//if($ret){
-				//	return $this->_toJson($ret);
-				//}
-				
-				$ret = array();
-				$profiles = $this->Profile->find('all');
-
-				foreach($profiles as $profile){
-					$ret[] = $profile['Profile'];
-				}
-				
-				//Cache::write("profiles", $ret);
-				
-				return $this->_toJson($ret);
+	public function profile( $action = '', $id = "" ){
+		if($action == 'list'){
+			//id is empty so list all profiles
+		
+			$ret = array();
+			$profiles = $this->Profile->find('all');
+		
+			foreach($profiles as $profile){
+				$ret[] = $profile['Profile'];
 			}
-			
-			$profile = $this->Profile->findById($id);
-			
-			$ret = false;
-			if(!empty($profile)){
-				$ret = $profile['Profile'];
-			} 
-			
-			return $this->_toJson($ret);
+
+			return $this->_toJson(array('success'=>true, 'data'=>$ret));
 		}
 		
-		if($this->request->isPost()){
+		if($action == 'get'){
+			$profile = $this->Profile->findById($id);
+			
+			if(!empty($profile)){
+				return(array('success'=>true, 'data'=>$profile['Profile']));
+			} 
+			
+			return $this->_toJson(array('success'=>false, 'message'=>'Unable to find profile.'));
+		}
+		
+		if($action == 'save'){
 			//get any existing data about the profile
 			
-			$data = $this->request->data;			
-			//$data = current($data);
+			$data = $this->request->data;
 			
 			if(empty($data['_id']) && empty($data['name'])){
 				return $this->toJason(false);
@@ -74,54 +64,53 @@ class ApiController extends AppController {
 			$data = $this->Profile->save($data);
 			
 			if(!empty($data)){
-				return $this->_toJson($data['Profile']);
+				return $this->_toJson(array('success'=>true, 'data'=>$data['Profile']));
 			}
 			
-			return $this->_toJson(false);
+			return $this->_toJson(array('success'=>false, 'message'=>'Unable to save data.'));
 		}
 		
-		if($this->request->isDelete()){
+		if($action == 'delete'){
 			$id = $data['_id'];
 			
 			
 			
 			$return = $this->Profile->delete($id);
 			
-			return $this->_toJson($id);
+			return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 		}
 
 		return $this->_toJson(false);
 	}
 	
-	public function user( $id = "" ){
-		if($this->request->isGet()){
-			if(empty($id)){
-				//id is empty so list all users
-			
-				$ret = array();
-				$users = $this->User->find('all');
-			
-				foreach($users as $user){
-					$user = $user['User'];
-					unset($user['password']);//never transmit (hashed) passwords over an open api
-			
-					$ret[] = $user;
-				}
-			
-				return $this->_toJson($ret);
+	public function user( $action = '', $id = "" ){
+		if($action == "list"){
+			//id is empty so list all users
+				
+			$ret = array();
+			$users = $this->User->find('all');
+				
+			foreach($users as $user){
+				$user = $user['User'];
+				unset($user['password']);//never transmit (hashed) passwords over an open api
+					
+				$ret[] = $user;
 			}
 			
+			return $this->_toJson(array('success'=>true, 'data'=>$ret));
+		}
+		
+		if($action == "get"){			
 			$user = $this->User->findById($id);
 				
-			$ret = false;
 			if(!empty($user)){
-				$ret = $user['User'];
+				$this->_toJson(array('success' => 'false', 'data'=>$user['User']));
 			}
 				
-			return $this->_toJson($ret);
+			return $this->_toJson(array('success' => 'false', 'message'=>'Unable to locate user.'));
 		}
 	
-		if($this->request->isPost()){
+		if(false || $this->request->isPost()){
 			//get any existing data about the user
 			
 			$data = $this->request->data;			
@@ -147,11 +136,11 @@ class ApiController extends AppController {
 			return $this->_toJson(false);
 		}
 	
-		return $this->_toJson(false);
+		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 	}
 	
-	public function block( $id = '' ){ 
-		if($this->request->isGet()){
+	public function block( $action = '',  $id = '' ){ 
+		if($action == 'list'){
 			$blocks = $this->Block->find('all');
 			
 			$results = array();
@@ -170,19 +159,14 @@ class ApiController extends AppController {
 				);
 			}
 			
-			return $this->_toJson($blocks);
+			return $this->_toJson(array('success'=>true, 'data'=>$blocks));
 		}
-		
-		if($this->request->isPost()){
-			$ret = false;
-			return $this->_toJson($ret);
-		}
-		
-		return $this->_toJson(false);
+
+		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 	}
 	
-	public function live( $profileId = '', $blockId = '' ){
-		if($this->request->isGet()){
+	public function live( $action = '', $profileId = '', $blockId = '' ){
+		if($action == 'get'){
 			if(empty($profileId) || empty($blockId)){
 				return $this->_toJson(false);
 			}		
@@ -216,7 +200,7 @@ class ApiController extends AppController {
 				return $this->_toJson($data);
 			}
 		}
-	
-		return $this->_toJson(false);
+
+		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 	}
 }
