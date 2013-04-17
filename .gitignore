@@ -10,6 +10,7 @@ app/[Cc]onfig/database.php
 /leafblower.sln
 /leafblower.suo
 /leafblower.intellisense.cache
+.*/*
 .settings/*
 .buildpath
 .project
