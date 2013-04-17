@@ -33,7 +33,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 0);
+	Configure::write('debug', 3);
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
@@ -151,12 +151,6 @@
 	//Configure::write('Cache.viewPrefix', 'prefix');
 
 /**
- * Defines the default error type when using the log() function. Used for
- * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
- */
-	define('LOG_ERROR', LOG_ERR);
-
-/**
  * Session configuration.
  *
  * Contains an array of settings to use for session configuration. The defaults key is
@@ -172,7 +166,7 @@
  *    value to false, when dealing with older versions of IE, Chrome Frame or certain web-browsing devices and AJAX
  * - `Session.defaults` - The default configuration set to use as a basis for your session.
  *    There are four builtins: php, cake, cache, database.
- * - `Session.handler` - Can be used to enable a custom session handler. Expects an array of of callables,
+ * - `Session.handler` - Can be used to enable a custom session handler. Expects an array of callables,
  *    that can be used with `session_save_handler`. Using this option will automatically add `session.save_handler`
  *    to the ini array.
  * - `Session.autoRegenerate` - Enabling this setting, turns on automatic renewal of sessions, and
@@ -327,7 +321,7 @@ if (Configure::read('debug') > 0) {
 }
 
 // Prefix each application on the same server with a different string, to avoid Memcache and APC conflicts.
-$prefix = 'myapp_';
+$prefix = 'leafblower_';
 
 /**
  * Configure the cache used for general framework caching. Path information,
