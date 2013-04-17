@@ -165,42 +165,41 @@ class ApiController extends AppController {
 		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 	}
 	
-	public function live( $action = '', $profileId = '', $blockId = '' ){
-		if($action == 'get'){
-			if(empty($profileId) || empty($blockId)){
-				return $this->_toJson(false);
-			}		
-			
-			$profile = $this->Profile->findById($profileId);
-			
-			if(empty($profile)){
-				return $this->_toJson(false);
-			}
-			
-			$profile = $profile['Profile'];
-			
-			$block = $this->Block->findById($blockId);
-			
-			if(empty($block)){
-				return $this->_toJson(false);
-			}
-			
-			$block = $block['Block'];			
-			foreach($profile['blocks'] as $userBlock){
-				if($userBlock['_id'] == $blockId){
-					$block = Hash::merge($block, $userBlock);
-				}
-			}
-			
-			
-			
-			$data = $this->Block->live($block);
-			
-			if(!empty($data)){			
-				return $this->_toJson($data);
+	public function live( $profileId = '', $blockId = '' ){
+		if(empty($profileId) || empty($blockId)){
+			return $this->_toJson(false);
+		}		
+		
+		$profile = $this->Profile->findById($profileId);
+		
+		if(empty($profile)){
+			return $this->_toJson(false);
+		}
+		
+		$profile = $profile['Profile'];
+		
+		$block = $this->Block->findById($blockId);
+		
+		if(empty($block)){
+			return $this->_toJson(false);
+		}
+		
+		$block = $block['Block'];			
+		foreach($profile['blocks'] as $userBlock){
+			if($userBlock['_id'] == $blockId){
+				$block = Hash::merge($block, $userBlock);
 			}
 		}
+		
+		
+		
+		$data = $this->Block->live($block);
+		
+		if(!empty($data)){			
+			return $this->_toJson($data);
+		}
+		
 
-		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
+		return $this->_toJson(false);
 	}
 }
