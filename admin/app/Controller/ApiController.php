@@ -70,10 +70,7 @@ class ApiController extends AppController {
 			return $this->_toJson(array('success'=>false, 'message'=>'Unable to save data.'));
 		}
 		
-		if($action == 'delete'){
-			$data = $this->request->data;
-			$id = $data['_id'];
-						
+		if($action == 'delete'){						
 			$return = $this->Profile->delete($id);
 			
 			if($return){
