@@ -122,7 +122,6 @@ main {
         float:left;
         height:100%;
         width:265px;
-        border-right:1px solid 
     }
     
         main aside ul {
@@ -139,14 +138,22 @@ main {
                     display:block;
                     font-size:24px;
                     font-weight:300;
-                    padding:20px 0 20px 40px;
-                    background:url("../images/menu-closed.gif") no-repeat 0 25px;
+                    padding:5px 0 5px 35px;
+                    background:url("../images/menu-closed.gif") no-repeat 0 13px;
+                    outline:none;
+                    transition:opacity .5s;
                 }
                 
                 main aside #block-menu > li > a.open {
-                    background:url("../images/menu-open.gif") no-repeat 0 4px;
+                    background:url("../images/menu-open.gif") no-repeat 0 13px;
                 }
-            
+
+                    main aside #block-menu > li > a:hover,
+                    main aside #block-menu > li > a:active {
+                        opacity:.85;
+                        outline:none;
+                    }
+
                 main aside #block-menu li ul {
                     display:none;
                     margin:10px 0 0;
@@ -165,16 +172,17 @@ main {
                     }
                     
                         main aside #block-menu li ul li a {
-                            border-left:3px solid #182945;
-                            padding:24px 15px;
+                            border-left:5px solid #182945;
+                            padding:5px 25px 5px 20px;
                             font-size:18px;
                             display:block;
                             cursor:move;
+                            background:#fff;
                         }
                         
                         main aside #block-menu li ul li a:hover,
                         main aside #block-menu li ul li a:active {
-                            background:url("../images/dragger-bg.gif") no-repeat 230px 25px #fff;
+                            background:url("../images/dragger-bg.gif") no-repeat 215px 25px #fff;
                         }
     
     /* Content styling */
@@ -186,12 +194,13 @@ main {
     }
         
         main section .field-wrapper {
-            margin-bottom:15px;
+            margin:0 auto 15px;
+            width:600px;
         }
         
             main section label {
                 float:left;
-                width:140px;
+                width:150px;
                 text-align:right;
                 padding-right:15px;
             }
@@ -200,16 +209,17 @@ main {
             main section .field-wrapper textarea {
                 padding:3px;
                 border:1px solid #D4D6D4;
-                width:350px;
+                width:425px;
             }
             
             main section .profile-block-list {
-                min-height:200px;
-                width:505px;
-                border:1px dashed #D4D6D4;
-                border-radius:7px;                
-                padding:7px;
-                margin-bottom:15px;
+                background:#FFFFFF;
+                border: 1px dashed #E5E5E5;
+                border-radius: 3px 3px 3px 3px;
+                margin: 0 auto 15px;
+                min-height: 200px;
+                padding: 20px;
+                width: 600px;
             }
             
             main section .profile-block-list.drag-here {
@@ -218,12 +228,12 @@ main {
             }
                 
                 main section .profile-block-list .added-block {
-                    padding:5px;
-                    border-radius:3px;
-                    margin-bottom:7px;
-                    background:#0C6BA1;
-                    color:#D4D6D4;
-                    transition:background .5s, color .5s;
+                    background:#EEF5FA;
+                    border-left: 3px solid #4B586E;
+                    color: #000000;
+                    margin-bottom: 7px;
+                    padding: 5px 5px 5px 15px;
+                    transition: background 0.5s ease 0s, color 0.5s ease 0s;
                 }
                 
                     main section .profile-block-list .added-block input {
@@ -236,40 +246,54 @@ main {
                 list-style:none;
                 padding:0;
             }
-                
-                main section .profile-list h3 {
-                    font-weight:normal;
-                    margin-top:0;
+
+                main section .profile-list li {
+                    background:#f4f9fc;
+                    margin:5px 0;
                 }
                 
-                    main section .profile-list h3 a {
-                        display:block;
-                        color:#fff;
-                        background:#61ae24;
-                        border-radius:4px;
-                        padding:4px 7px;
+                    main section .profile-list li h3 {
+                        font-weight:normal;
+                        margin:0;
                     }
                 
-                    main section .profile-list h3 a:before {
-                        content:"[+]";
-                        font-family:Monospace;
-                        font-size:12px;
-                        padding-right:5px;
-                        margin-top:4px;
-                        float:left;
-                    }
+                        main section .profile-list li h3 a {
+                            display:block;
+                            color:#fff;
+                            font-weight:300;
+                            background:#61ae24;
+                            padding:5px 15px;
+                        }
                 
-                    main section .profile-list h3 a.expanded:before {
-                       content:"[-]";                
-                    }
+                        main section .profile-list li h3 a:before {
+                            content:"[+]";
+                            font-family:Monospace;
+                            font-size:12px;
+                            padding-right:5px;
+                            margin-top:4px;
+                            float:left;
+                        }
                 
-                main section .profile-list form {
-                    display:none;
-                }
+                        main section .profile-list li h3 a.expanded:before {
+                           content:"[-]";                
+                        }
+                
+                    main section .profile-list li form {
+                        display:none;
+                    }
                 
             main section .button-save-profile {
-                float:right;
+                background: none repeat scroll 0 0 #46A5E5;
+                border: medium none;
+                color: #FFFFFF;
+                float: right;
+                padding: 5px 10px;
+                transition:opacity .5s;
             }
+
+                main section .button-save-profile:hover {
+                    opacity:.85;
+                }
 
 main section.active {
     display:block;
@@ -282,8 +306,8 @@ main section.active {
 footer {
     margin:0 auto;
     width:960px;
-    background:#00182E;
-    color:#D4D6D4;
+    background:#f4f9fc;
+    color:#182945;
 }
 
     footer p {
@@ -291,3 +315,7 @@ footer {
         font-size:14px;
         margin:0;
     }
+
+        footer p a {
+            color:#000;
+        }
