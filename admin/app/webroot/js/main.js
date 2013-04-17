@@ -70,6 +70,8 @@ var adminCp = (function () {
 
         $.get(_this.baseUrl + '/api/profile', function (data) {
 
+            data = data.data;
+
             $('#list-profiles ul').empty();
 
             var profileMarkup = '', prefix;

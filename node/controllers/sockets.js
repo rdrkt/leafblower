@@ -17,7 +17,6 @@
 
         //server connection listener
         _this.io.sockets.on('connection', function (socket) {
-            console.log('connection....');
             //room joiner
             socket.on('join', function (room) {
                 console.log('join received');
@@ -43,7 +42,7 @@
         var apiOptions = {
             host: __App.config.baseApiDomain,
             method: 'GET',
-            path: '/api/profile'
+            path: '/api/profile/list'
         };
 
         var start = new Date();
@@ -51,7 +50,6 @@
 
             response.setEncoding('utf8');
             response.on('data', function (json) {
-                
                 //for debuggin
                 //console.log('[Profile list] Request took:', new Date() - start, 'ms');
 
@@ -84,7 +82,7 @@
     //setup profiles, emit block deletions, startup block api requests
     _this.setProfiles = function (json) {
 
-        var profileLists = JSON.parse(json);
+        var profileLists = JSON.parse(json).data;
 
         //store old profile blocks for deletions
         var oldProfileBlocks = _this.profileBlocks;
