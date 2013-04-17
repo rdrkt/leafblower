@@ -71,11 +71,14 @@ class ApiController extends AppController {
 		}
 		
 		if($action == 'delete'){
+			$data = $this->request->data;
 			$id = $data['_id'];
-			
-			
-			
+						
 			$return = $this->Profile->delete($id);
+			
+			if($return){
+				$this->_toJson(array('success'=>true));
+			}
 			
 			return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 		}
