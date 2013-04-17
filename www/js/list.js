@@ -12,8 +12,8 @@ var listPage = (function () {
     };
 
     _this.loadList = function () {
-        $.get('http://admin.leafblower.rdrkt.com/api/profile', function (data) {
-            $.each(data, function (key, profile) {
+        $.get('http://admin.leafblower.rdrkt.com/api/profile/list', function (data) {
+            $.each(data.data, function (key, profile) {
                 $('#profile-list').append('<li><a href="view.html#' + profile['_id'] + '" title="' + profile['name'] + '">' + profile['name'] + '</a></li>');
             });
         }, 'json');
