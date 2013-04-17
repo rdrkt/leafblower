@@ -4,7 +4,7 @@ class ApiController extends AppController {
 	public $uses = array('Block', 'User', 'Profile', 'Log');
 	
 	public function beforeFilter(){
-		Configure::write('debug', 2);
+		Configure::write('debug', 0);
 		$this->autoRender = false;
 		$this->response->header('Access-Control-Allow-Origin: *');
 	}
