@@ -65,6 +65,11 @@
                 <h2>Modify and delete existing profiles</h2>
 				<ul class="profile-list"></ul>
 			</section>
+
+			<section id="user-manager">
+				<h2>Manage users</h2>
+				<p>Coming soon...</p>
+			</section>
 						
         </main>
 
