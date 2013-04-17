@@ -4,7 +4,7 @@ class ApiController extends AppController {
 	public $uses = array('Block', 'User', 'Profile', 'Log');
 	
 	public function beforeFilter(){
-		//Configure::write('debug', 0);
+		Configure::write('debug', 2);
 		$this->autoRender = false;
 		$this->response->header('Access-Control-Allow-Origin: *');
 	}
@@ -87,7 +87,7 @@ class ApiController extends AppController {
 			
 			$return = $this->Profile->delete($id);
 			
-			$this->_toJson($id);
+			return $this->_toJson($id);
 		}
 
 		return $this->_toJson(false);
