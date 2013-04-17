@@ -95,7 +95,7 @@ header {
         
         header nav a:hover,
         header nav a:active {
-            background:#61ae24;
+            background-color:#61ae24;
             outline:none;
         }
 
@@ -251,7 +251,16 @@ main {
                     background:#f4f9fc;
                     margin:5px 0;
                 }
-                
+
+                    main section .profile-list li form {
+                        padding:25px 0;
+                        display:none;
+                    }
+
+                        main section .profile-list li form .delete-profile {
+                            margin:0 0 0 25px;
+                        }
+
                     main section .profile-list li h3 {
                         font-weight:normal;
                         margin:0;
@@ -277,9 +286,8 @@ main {
                         main section .profile-list li h3 a.expanded:before {
                            content:"[-]";                
                         }
-                
+                    
                     main section .profile-list li form {
-                        display:none;
                     }
                 
             main section .button-save-profile {
@@ -288,6 +296,7 @@ main {
                 color: #FFFFFF;
                 float: right;
                 padding: 5px 10px;
+                margin:0 25px 0 0;
                 transition:opacity .5s;
             }
 
@@ -304,7 +313,7 @@ main section.active {
     }
 
 footer {
-    margin:0 auto;
+    margin:0 auto 25px;
     width:960px;
     background:#f4f9fc;
     color:#182945;
