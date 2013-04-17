@@ -13,7 +13,7 @@ class ApiController extends AppController {
 		return json_encode($array);		
 	}	
 	
-	public function profile( $action, $id = "" ){
+	public function profile( $action = '', $id = "" ){
 		if($action == 'list'){
 			//id is empty so list all profiles
 		
@@ -83,7 +83,7 @@ class ApiController extends AppController {
 		return $this->_toJson(false);
 	}
 	
-	public function user( $action, $id = "" ){
+	public function user( $action = '', $id = "" ){
 		if($action == "list"){
 			//id is empty so list all users
 				
@@ -139,7 +139,7 @@ class ApiController extends AppController {
 		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 	}
 	
-	public function block( $action, $id = '' ){ 
+	public function block( $action = '',  $id = '' ){ 
 		if($action == 'list'){
 			$blocks = $this->Block->find('all');
 			
@@ -165,7 +165,7 @@ class ApiController extends AppController {
 		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 	}
 	
-	public function live( $action, $profileId = '', $blockId = '' ){
+	public function live( $action = '', $profileId = '', $blockId = '' ){
 		if($action == 'get'){
 			if(empty($profileId) || empty($blockId)){
 				return $this->_toJson(false);
