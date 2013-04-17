@@ -80,10 +80,10 @@ class ApiController extends AppController {
 				$this->_toJson(array('success'=>true));
 			}
 			
-			return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
+			return $this->_toJson(array('success'=>false, 'message'=>'Unable to locate profile to delete.'));
 		}
 
-		return $this->_toJson(false);
+		return $this->_toJson(array('success'=>false, 'message'=>'Invalid or no action specified.'));
 	}
 	
 	public function user( $action = '', $id = "" ){
