@@ -110,7 +110,7 @@ header {
 
 main {
     margin:0 auto;
-    width:960px;
+    width:970px;
     height:auto !important;
 }
     
@@ -142,7 +142,7 @@ main {
         -webkit-box-sizing:border-box;
         -moz-box-sizing:border-box;
         padding:5px;
-        background:#D4D6D4;
+        background:#f6f9fd;
         color:#00182E;
     }
     
