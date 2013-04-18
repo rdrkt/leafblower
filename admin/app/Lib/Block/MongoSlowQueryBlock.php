@@ -4,7 +4,7 @@ class MongoSlowQueryBlock extends BaseBlock {
 		$db = new MongoClient("mongodb://{$options['host']}");
 		$db = $db->selectDb($options['db']);
 		
-		$res = $db->system->profile->find()->limit(1);
+		$res = $db->system->profile->find(array('op'=>'query'))->sort(array('ts'=>-1))->limit(1);
 		
 		foreach($res as $r){
 			return array_merge($r, array('host'=>$options['host']));
