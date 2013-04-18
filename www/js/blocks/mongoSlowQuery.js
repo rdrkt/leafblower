@@ -11,7 +11,7 @@ var mongoSlowQuery = (function () {
 
     _this.setData = function (data) {
         delay = Math.ceil((data.lockStats.timeLockedMicros.R + data.lockStats.timeLockedMicros.W) / 100) / 10; //round to 1 decimal after by dividing by 1000 to get ms
-        $('#mongoSlowQuery').find('h3').attr('title', delay  + 'ms on collection: "' + data.ns.split('.')[1] + '"').html(delay + ' ms<span>Collection: <br />"' + data.ns.split('.')[1] + '"</span>');
+        $('#mongoSlowQuery').find('h3').attr('title', delay  + 'ms on collection: "' + data.ns + '"').html(delay + '<span>ms<br />' + data.ns + '"</span>');
     };
 
     _this.deleteBlock = function () {
