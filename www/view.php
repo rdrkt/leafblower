@@ -19,20 +19,20 @@
     </head>
     <body>
         
-        
+        <div id="loading-overlay"></div>
+		<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
+
         <header class="clearfix">
 			<a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/leafblower-logo.png" alt="Leafblower" /></a>
             <nav>
-				<a href="list.html" title="List profile" class="list-profiles">
+				<a href="list.php" title="List profile" class="list-profiles">
 					List profile
 				</a>
 			</nav>
         </header>
 
-        <main>
+        <main class="clearfix">
             
-            <ul id="profile-list"></ul>
-
         </main>
 
         <footer>
@@ -42,6 +42,14 @@
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="js/list.js"></script>
+        <script src="js/vendor/d3.3.1.5-min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+        <script src="js/blocks/countingBeanstalkd.js"></script>
+        <script src="js/blocks/countingMongodb.js"></script>
+        <script src="js/blocks/geoCheckIns.js"></script>
+        <script src="js/blocks/gridfsView.js"></script>
+        <script src="js/blocksController.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

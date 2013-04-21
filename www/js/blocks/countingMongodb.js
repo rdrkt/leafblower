@@ -41,6 +41,7 @@ var countingMongodb = (function () {
                 'width': newWidth
             }, 100, function () {
                 $(this).toggleClass('large-block');
+                $(this).find('.large-only').toggle(200);
             });
         });
     };

@@ -6,7 +6,7 @@ var viewManager = (function () {
 
     _this.run = function () {
 
-        _this.socket = io.connect('http://leafblower.rdrkt.com:8080');
+        _this.socket = io.connect('http://localhost:8080');
         _this.loadEvents();
         _this.reshapePage();
         _this.blockController = new blockController();
@@ -61,8 +61,13 @@ var viewManager = (function () {
         //data throughput from Node
         _this.socket.on('data', function (data) {
             _this.blockController.handleData(data);
-            $('footer').after('<p class="log-block" style="margin:0 auto; width:960px; font-family:monospace;">' + data.substr(0, 116) + ' ...</p>');
-            $('.log-block:nth(10)').remove();
+            //$('footer').after('<p class="log-block" style="margin:0 auto; width:960px; font-family:monospace;">' + data.substr(0, 116) + ' ...</p>');
+            //$('.log-block:nth(10)').remove();
+            if ($('#log-counter').length < 1) {
+                $('footer').after('<p id="log-counter">0</p>');
+            } else {
+                $('#log-counter').text(parseInt($('#log-counter').text())+1);
+            }
         });
 
         //block delete event
@@ -73,7 +78,40 @@ var viewManager = (function () {
         //profile delete event - send back to list page
         _this.socket.on('profileDelete', function (d) {
             alert('The profile you are currently viewing has been removed, you will now be redirected to the profile listing page');
-            document.location.href = 'list.html';
+            document.location.href = 'list.php';
+        });
+
+        /*
+        *
+        *   - Actual DOM events
+        *
+        */
+
+
+        //handles an expandable block being toggled
+        $(document).on('click', '.expandable-block h3 a', function (e) {
+            e.preventDefault();
+
+            var $block = $(this).parents('.expandable-block');
+
+            if ($block.hasClass('large-block')) { var newWidth = 150, newHeight = 150; }
+            else { var newWidth = $('main').width() - 10, newHeight = 310; }
+
+            //toggle large block class
+            $block.toggleClass('large-block');
+
+            $block.animate({
+                'height': newHeight,
+                'width': newWidth
+            }, 500, function () {
+
+                if ($block.is('.large-block')) {
+                    $block.find('.large-only').fadeIn(250);
+                    $('html, body').animate({ 'scrollTop': $block.offset().top }, 200);
+                } else {
+                    $block.find('.large-only').removeAttr('style');
+                }
+            });
         });
 
     };
