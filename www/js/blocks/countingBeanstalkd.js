@@ -72,11 +72,6 @@ var countingBeanstalkd = (function () {
 
     _this.loadEvents = function () {
 
-        //added event for expanding content - get rid of graph, it'll get redrawn later
-        $(document).on('click', '#countingBeanstalkd h3 a', function (e) {
-            $('#countingBeanstalkd-graph').remove();
-        });
-
         //handle data toggling
         $(document).on('click', '#countingBeanstalkd-graph path, #countingBeanstalkd-graph text', function (e) {
             //get parent arc
