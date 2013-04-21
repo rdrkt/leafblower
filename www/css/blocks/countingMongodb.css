@@ -1,0 +1,6 @@
+
+
+#countingMongodb text { display:none; }
+#countingMongodb .arc { opacity:0.9; }
+#countingMongodb .arc:hover { opacity:1; }
+#countingMongodb .arc:hover text {display:block; }

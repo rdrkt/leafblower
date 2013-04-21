@@ -19,20 +19,17 @@
     </head>
     <body>
         
-        
         <header class="clearfix">
-			<a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/leafblower-logo.png" alt="Leafblower" /></a>
+            <h1>Leafblower</h1>
             <nav>
-				<a href="list.html" title="List profile" class="list-profiles">
-					List profile
+				<a href="list.php" title="List profiles">
+					<img src="images/list-profiles.png" alt="List profile">
 				</a>
 			</nav>
         </header>
 
         <main>
             
-            <ul id="profile-list"></ul>
-
         </main>
 
         <footer>
@@ -41,7 +38,12 @@
 
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="js/list.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script>
+            document.location = 'list.php'; // temp till auth is added
+        </script>
+        <script src="js/blocksManager.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

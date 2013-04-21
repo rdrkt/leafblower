@@ -1,0 +1,90 @@
+
+
+
+#countingBeanstalkd-graph {
+    float: left;
+    width: 450px;
+}
+
+    #countingBeanstalkd-graph .arc {
+        opacity:.85;
+        transition:opacity .5s;
+        cursor:pointer;
+    }
+
+    #countingBeanstalkd-graph .arc:hover {
+        opacity:1;
+    }
+
+        #countingBeanstalkd-graph .arc text {
+            opacity:.85;
+            transition:opacity .5s;
+        }
+
+        #countingBeanstalkd-graph .arc:hover text {
+            opacity:1;
+        }
+
+    #countingBeanstalkd-graph .active-job {
+        opacity: 1;
+        cursor:default;
+    }
+
+        #countingBeanstalkd-graph .active-job text {
+            opacity:1;
+        }
+
+#countingBeanstalkd-data {
+    float:right;
+    width:740px;
+}
+
+    #countingBeanstalkd-data .data-wrapper {
+        display:none;
+    }
+
+    #countingBeanstalkd-data .data-wrapper.active-data {
+        display:block;
+    }
+
+        #countingBeanstalkd-data .data-wrapper h4 {
+            margin:0 0 5px 5px;
+        }
+
+        #countingBeanstalkd-data .data-wrapper ul {
+            list-style:none;
+            padding:0;
+            margin:0;
+        }
+
+            #countingBeanstalkd-data .data-wrapper ul li {
+                float:left;
+                background:#fff;
+                text-align:center;
+                margin:5px;
+                padding:10px;
+            }
+
+                #countingBeanstalkd-data .data-wrapper ul li h5 {
+                    margin:0;
+                }
+
+                #countingBeanstalkd-data .data-wrapper ul li p {
+                    margin:0;
+                }
+
+/* handle 960 tablet landscape and regular small desktop/notebook */
+@media
+/* legacy webkit */
+only screen and (min-width:961px) and (max-width: 1300px) and (-webkit-max-device-pixel-ratio:1), only screen and (min-device-height:961px) and (max-device-height: 1300px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape), only screen and (min-device-width:961px) and (max-device-width: 1300px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait),
+/* legacy firefox */
+only screen and (min-width:961px) and (max-width: 1300px) and (max--moz-device-pixel-ratio:1), only screen and (min-device-height:961px) and (max-device-height: 1300px) and (min--moz-device-pixel-ratio: 1.5) and (orientation: landscape), only screen and (min-device-width:961px) and (max-device-width: 1300px) and (min--mozdevice-pixel-ratio: 1.5) and (orientation: portrait),
+/* modern webkit */
+only screen and (min-width:961px) and (max-width: 1300px) and (max-device-pixel-ratio:1), only screen and (min-device-height:961px) and (max-device-height: 1300px) and (min-device-pixel-ratio: 1.5) and (orientation: landscape), only screen and (min-device-width:961px) and (max-device-width: 1300px) and (min-device-pixel-ratio: 1.5) and (orientation: portrait),
+/* modern firefox */
+only screen and (min-width:961px) and (max-width: 1300px) and (max-resolution: 1dppx), only screen and (min-device-height:961px) and (max-device-height: 1300px) and (min-resolution: 1.5dppx) and (orientation: landscape), only screen and (min-device-height:961px) and (max-device-width: 1300px) and (min-resolution: 1.5dppx) and (orientation: portrait) {
+    #countingBeanstalkd-data {
+        float:right;
+        width:430px;
+    }
+}

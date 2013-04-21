@@ -174,7 +174,8 @@
                             _this.queueProcessor.add(function () { delete _this.blockCache[profileId + '-' + blockId]; }, parseInt(ttl / 2));
 
                         } catch (err) {
-                            console.log(err);
+                            //console.log(apiOptions.path);
+                            //console.log(err);
                         }
 
                         //and add back to queue

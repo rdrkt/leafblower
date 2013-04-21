@@ -111,7 +111,9 @@ header {
 main {
     margin:0 auto;
     width:960px;
+    min-height:160px;
     height:auto !important;
+    background:url("../images/loading-blocks.gif") no-repeat 65px 65px;
 }
     
     main #profile-list {
@@ -141,13 +143,14 @@ main {
         box-sizing:border-box;
         -webkit-box-sizing:border-box;
         -moz-box-sizing:border-box;
-        padding:5px;
-        background:#D4D6D4;
+        background:#f6f9fd;
         color:#00182E;
     }
     
         main .block .large-only {
             display:none;
+            padding:5px;
+            padding:5px;
         }
     
     main .large-block {
@@ -155,13 +158,10 @@ main {
         height:310px;
         margin:5px;
     }
-    
-        main .large-block .large-only {
-            display:block;
-        }
-        
+            
         main .large-block .small-only {
             display:none;
+            padding:5px;
         }
    
     main .block h3 {

@@ -25,7 +25,7 @@
         <header class="clearfix">
 			<a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/leafblower-logo.png" alt="Leafblower" /></a>
             <nav>
-				<a href="list.html" title="List profile" class="list-profiles">
+				<a href="list.php" title="List profile" class="list-profiles">
 					List profile
 				</a>
 			</nav>
@@ -42,7 +42,7 @@
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="s/vendor/d3.3.1.5-min.js"></script>
+        <script src="js/vendor/d3.3.1.5-min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="http://leafblower.rdrkt.com:8080/socket.io/socket.io.js"></script>
         <script src="js/blocks/countingBeanstalkd.js"></script>
