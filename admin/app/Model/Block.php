@@ -9,7 +9,7 @@ class Block extends AppModel {
 			return array();
 		}
 		
-		$output = str_replace("Tasks:", "", $output);
+		$output = str_replace(array("\n", "\r", "Tasks:"), "", $output);
 		
 		$output = explode(",", $output);
 		
@@ -34,7 +34,8 @@ class Block extends AppModel {
 			return array();
 		}
 	
-		$output = str_replace("Mem:", "", $output);
+		$output = str_replace(array("\n", "\r", "Mem:"), "", $output);
+				
 	
 		$output = explode(",", $output);
 	
@@ -92,7 +93,11 @@ class Block extends AppModel {
 			$method = "_" . $block["_id"];
 			
 			if(method_exists($this, $method)){
-				return call_user_func(array($this, $method), $block['options']);
+				$data = call_user_func(array($this, $method), $block['options']);
+				
+				$this->_saveHistory($data);
+				
+				return $data;
 			}
 		}
 		
