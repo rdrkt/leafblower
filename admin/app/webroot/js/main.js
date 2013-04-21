@@ -28,10 +28,13 @@ var adminCp = (function () {
         //empty out list
         $listWrapper.empty();
 
-        $.get(_this.baseUrl + '/api/block', function (data) {
+        $.get(_this.baseUrl + '/api/block/list', function (data) {
             //var data = JSON.parse('[{ "name": "Counting", "type": "counting", "blocks": [{ "_id": "countingBeanstalkd", "type": "counting", "title": "Beanstalkd Tube Counting", "description": "Block for visualizing the size of tubes and the workers that are watching them", "ttl": 1000, "options": { "value1": "default", "value2": "default2"} }, { "_id": "countingMongodb", "type": "counting", "title": "Mongodb Collection Counting", "description": "Block for visualizing the size of collections and their indexes", "ttl": 1000, "options": { "value1": "default", "value2": "default2"}}] }, { "name": "Geospacial", "type": "geospacial", "blocks": [{ "_id": "geoCheckIns", "type": "geospacial", "title": "Checkin visualiser", "description": "Block for visualizing the checkins occuring in your app bound by a circle centered at a given lat\/lon and radius", "ttl": 5000, "options": { "lat": -33.873651, "lon": -151.2068896, "radius": 50, "collection": "checkins"}}] }, { "name": "Filesystem", "type": "filesystem", "blocks": [{ "_id": "gridfsView", "type": "filesystem", "title": "Mongodb GridFS Viewer", "description": "View all the files in your GridFS collection as if they are in a physical storage volume", "ttl": 1000, "options": []}]}]'); ;
-
-            $.each(JSON.parse(data), function (key, type) {
+        	
+        	
+        	data = JSON.parse(data);
+        	data = data.data;
+            $.each(data, function (key, type) {
                 if (type.blocks.length > 0) {
                     $listWrapper.append('<li><a href="" title="' + type.name + '" id="' + type.type + '">' + type.name + '</a><ul class="blocks-list"></ul></li>');
                     $blocksWrapper = $('#' + type.type).siblings('.blocks-list');
@@ -68,7 +71,7 @@ var adminCp = (function () {
     _this.loadProfileList = function () {
         _this.showLoader();
 
-        $.get(_this.baseUrl + '/api/profile', function (data) {
+        $.get(_this.baseUrl + '/api/profile/list/', function (data) {
 
             data = data.data;
 
@@ -164,7 +167,7 @@ var adminCp = (function () {
             profile['description'] = $form.find('.profile-description').val();
             profile['blocks'] = JSON.parse(decodeURI($form.find('.blockJson').val()));
 
-            $.post(_this.baseUrl + '/api/profile', profile, function () {
+            $.post(_this.baseUrl + '/api/profile/save', profile, function () {
 
                 alert('Profile saved');
                 _this.hideLoader();
