@@ -2,6 +2,60 @@
 App::uses('Queue', 'Job');
 
 class Block extends AppModel {
+	protected function _tasks($options){
+		$output = exec("top -b | head | grep Tasks");
+		
+		if(empty($output)){
+			return array();
+		}
+		
+		$output = str_replace("Tasks:", "", $output);
+		
+		$output = explode(",", $output);
+		
+		$tasks = array();
+		foreach($output as $task){
+			$task = trim($task);
+			$task = explode(" ", $task);
+			
+			$name = $task[1];
+			$value = $task[0];
+			
+			$tasks[$name] = $value;
+		}
+		
+		return $tasks;
+	}
+	
+	protected function _memory($options){
+		$output = exec("top -b | head | grep Mem");
+	
+		if(empty($output)){
+			return array();
+		}
+	
+		$output = str_replace("Mem:", "", $output);
+	
+		$output = explode(",", $output);
+	
+		$tasks = array();
+		foreach($output as $task){
+			$task = trim($task);
+			$task = explode(" ", $task);
+				
+			$name = $task[1];
+			$value = $task[0];
+				
+			$tasks[$name] = $value;
+		}
+	
+		return $tasks;
+	}
+	
+	protected function _geoCheckIns($options){
+		
+	}
+	
 	protected function _countingMongodb($options){
 		$db = new MongoClient("mongodb://{$options['host']}");
 		$db = $db->selectDb($options['db']);
