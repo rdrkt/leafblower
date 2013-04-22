@@ -162,16 +162,15 @@
                         //for debugging
                         //console.log('[' + profileId + ' - ' + blockId + '] Request took:', new Date() - start, 'ms');
 
-
                         try {
                             var json = JSON.parse(json);
                             json = { 'block': blockId, 'data': json };
                             _this.broadcastData('data', profileId, json);
 
-                            //add data to the cache, and set a timeout to delete the cache in 50% of ttl
+                            //add data to the cache, and set a timeout to delete the cache in 2.1 times the ticker pace
                             //so the same profile viewer doesn't get the same cached item
                             _this.blockCache[profileId + '-' + blockId] = json;
-                            _this.queueProcessor.add(function () { delete _this.blockCache[profileId + '-' + blockId]; }, parseInt(ttl / 2));
+                            _this.queueProcessor.add(function () { delete _this.blockCache[profileId + '-' + blockId]; }, parseInt(__App.config.tickerSpeed * 2.1));
 
                         } catch (err) {
                             //console.log(apiOptions.path);
