@@ -20,6 +20,11 @@ We wrote Leafblower to make it as easy as possible to create new Blocks for your
 
 All you need to create a new Block is 2 files. 1 is the controller which gathers the information you want to send to your Block and passes it to our node communication layer, and the other is a javascript file which renders the data in the Block.
 
+###It's responsive!###
+Setting up your dashboard profiles is a snap with our admin panel.  To add additional blocks to your dashboard, just drag and drop.
+
+More importantly, nearly all the Blocks are responsive. This isn't your father's internet. We understand that you might want to use your desktop to monitor an application while you're at work, but keep an eye on things while you're traveling to a big client meeting for a live demo of your application. Leafblower keeps you informed with a simple, clean interface that gives you exactly the information you need, when you need it.
+
 Requirements
 ------------
 
