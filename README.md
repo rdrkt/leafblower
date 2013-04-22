@@ -61,7 +61,7 @@ Want to write your own Block? Here’s an example of how easy it is to add a new
 
 ###The PHP Controller:###
 
-All Blocks live in ``admin/app/Lib/Block``.  They are vanilla PHP.  All you have to do is implement your own version of ``display()`` which accepts an array of options and then outputs an array to send to your display JavaScript.
+All PHP Blocks live in ``admin/app/Lib/Block``.  They are vanilla PHP.  All you have to do is implement your own version of ``display()`` which accepts an array of options and then outputs a string or array to send to your display JavaScript.
 
 > class ClockBlock extends BaseBlock {
 > 
@@ -71,7 +71,7 @@ All Blocks live in ``admin/app/Lib/Block``.  They are vanilla PHP.  All you have
 >
 > }
 
-###The javascript:###
+###The JavasSript:###
 
 All JS block output controllers live in ``www/js/blocks``. They are vanilla JS and have jQuery/Modernizr/D3 available to them by default, and a handful of parent methods. There are two mandatory methods required in every block ``_this.setData(data)`` which is responsible for receiving JSON strings from Node and ``_this.deleteBlock()`` which is responsible for deleting the block and dropping it from the DOM should it be deleted in the admin panel, Node will send the notification and the blockController will notify your block to self-delete.
 
