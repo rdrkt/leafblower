@@ -224,7 +224,19 @@ main {
     main .block.large-block h3 {
         padding-top:10px;
     }
-   
+    
+    /*warnings/errors*/
+    main .block.warning-block h3,
+    main .block.warning-block h3 a {
+        color:#ebae09 !important;
+    }
+
+    main .block.error-block h3,
+    main .block.error-block h3 a {
+        color:#c13514 !important;
+    }
+
+
         main .block h3 a {
             color:#00182E;
             outline:none;

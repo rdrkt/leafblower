@@ -13,6 +13,17 @@ var memory = (function () {
 
         var freePercentage = ((parseInt(data.free) / parseInt(data.total)) * 100).toFixed(2);
         
+        //remove warning/error classes
+        $('#memory').removeClass('warning-block error-block');
+        //if under 2 memory % left, warning.
+        if (freePercentage < 2) {
+            $('#memory').addClass('warning-block');
+        }
+        //if under .5 memory % left, error block.
+        if (freePercentage < 0.5) {
+            $('#memory').addClass('error-block');
+        }
+
         $('#memory').find('h3').find('a').attr('title', freePercentage + '% Free memory').html(freePercentage + '<span>% Free memory</span>');
 
         //get the large content block and empty, then inject content
