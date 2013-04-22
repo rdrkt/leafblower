@@ -158,6 +158,22 @@ main {
 
             /* global styles for blocks */
 
+            main .block .large-only .data-group {
+                padding:5px;
+            }
+
+                main .block .large-only .data-group h5 {
+                    padding:0 0 5px;
+                    border-bottom:1px solid 182945;
+                    margin:0 0 5px;
+                }
+
+                main .block .large-only .data-group p.text-data {
+                    margin:3px 0;
+                    padding:0;
+                    font-size:11px;
+                }
+
             main .block .large-only p.text-data {
                 margin:7px 0;
                 padding:3px 30px;
