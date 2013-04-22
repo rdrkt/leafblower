@@ -124,6 +124,7 @@ main {
         float:left;
         height:100%;
         width:265px;
+        padding:0 0 30px;
     }
     
         main aside ul {
@@ -184,7 +185,7 @@ main {
                         
                         main aside #block-menu li ul li a:hover,
                         main aside #block-menu li ul li a:active {
-                            background:url("../images/dragger-bg.gif") no-repeat 215px 25px #fff;
+                            background:url("../images/dragger-bg.gif") no-repeat 215px center #fff;
                         }
     
     /* Content styling */

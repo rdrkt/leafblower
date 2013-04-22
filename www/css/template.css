@@ -204,6 +204,10 @@ main {
         padding-top:20%;
         font-weight:normal;
     }
+
+    main .block.large-block h3 {
+        padding-top:10px;
+    }
    
         main .block h3 a {
             color:#00182E;
@@ -244,7 +248,7 @@ main {
     }
 
 footer {
-    margin:0 auto 25px;
+    margin:5px auto 25px;
     width:960px;
     background:#f4f9fc;
     color:#182945;
