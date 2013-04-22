@@ -72,6 +72,17 @@ class Block extends AppModel {
 		return $ret;
 	} 
 	
+	protected function _mongoSlowQuery($options){
+		$db = new MongoClient("mongodb://{$options['host']}");
+		$db = $db->selectDb($options['db']);
+		
+		$res = $db->system->profile->find()->limit(1);
+		
+		foreach($res as $r){
+			return array_merge($r, array('host'=>$options['host']));
+		}
+	}
+	
 	protected function _mongoServerStats($options){
 		$db = new MongoClient("mongodb://{$options['host']}");
 		$db = $db->selectDb($options['db']);

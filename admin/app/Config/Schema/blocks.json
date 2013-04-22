@@ -4,3 +4,4 @@
 { "_id" : "tasks", "type" : "system", "title" : "System tasks", "description" : "View statistics about the number and types of processes running on your server.", "ttl" : 1000, "options" : {} }
 { "_id" : "memory", "type" : "system", "title" : "Memory", "description" : "View statistics about the memory usage on your server.", "ttl" : 1000, "options" : {} }
 { "_id" : "mongoServerStats", "type" : "system", "title" : "Mongo Server Statistics", "description" : "View statistics about a Mongo server.", "ttl" : 1000, "options" : { "db" : "demo", "host": "localhost" } }
+{ "_id" : "mongoSlowQuery", "type" : "system", "title" : "Mongo Slow Query", "description" : "View stats about the last slow query on a Mongo server.", "ttl" : 60000, "options" : { "db" : "demo", "host": "localhost" } }
