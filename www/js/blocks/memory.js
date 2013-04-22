@@ -15,11 +15,11 @@ var memory = (function () {
         
         //remove warning/error classes
         $('#memory').removeClass('warning-block error-block');
-        //if under 2 memory % left, warning.
+        //if under 2 % memory left, warning.
         if (freePercentage < 2) {
             $('#memory').addClass('warning-block');
         }
-        //if under .5 memory % left, error block.
+        //if under .5 % memory left, error block.
         if (freePercentage < 0.5) {
             $('#memory').addClass('error-block');
         }
