@@ -58,6 +58,7 @@
 
                 //we don't want lag buildup or profile updates to require node.js restart, check profiles and restart queue periodically
                 _this.queueProcessor.add(function () {
+                    _this.blockCache = {};
                     _this.queueProcessor.stop();
                     _this.queueProcessor.start();
                     _this.loadProfiles();
@@ -69,7 +70,7 @@
         }).on('error', function (e) {
             console.log('[Profile List Err] : ' + e.message);
 
-            //we don't want lag buildup or profile updates to require node.js restart, check profiles and restart queue periodically
+            //well, if we've got here there's probably an API problem. check for the API profile/list again in 1 sec. Rinse, and repeat.
             _this.queueProcessor.add(function () {
                 _this.queueProcessor.stop();
                 _this.queueProcessor.start();
@@ -162,16 +163,15 @@
                         //for debugging
                         //console.log('[' + profileId + ' - ' + blockId + '] Request took:', new Date() - start, 'ms');
 
-
                         try {
                             var json = JSON.parse(json);
                             json = { 'block': blockId, 'data': json };
                             _this.broadcastData('data', profileId, json);
 
-                            //add data to the cache, and set a timeout to delete the cache in 50% of ttl
+                            //add data to the cache, and set a timeout to delete the cache in 2.1 times the ticker pace
                             //so the same profile viewer doesn't get the same cached item
                             _this.blockCache[profileId + '-' + blockId] = json;
-                            _this.queueProcessor.add(function () { delete _this.blockCache[profileId + '-' + blockId]; }, parseInt(ttl / 2));
+                            _this.queueProcessor.add(function () { delete _this.blockCache[profileId + '-' + blockId]; }, parseInt(__App.config.tickerSpeed * 2.1));
 
                         } catch (err) {
                             //console.log(apiOptions.path);

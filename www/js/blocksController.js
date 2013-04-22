@@ -11,6 +11,12 @@ var blockController = (function () {
     _this.handleData = function (jsonString) {
         var json = JSON.parse(jsonString);
 
+        //output to console
+        if (json.debug) {
+            console.info(json);
+        }
+
+        //if the block isn't initialised, startup.
         if (!eval('_this.' + json.block)) {
             eval('_this.' + json.block + ' = new ' + json.block + '()');
         }

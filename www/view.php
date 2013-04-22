@@ -50,6 +50,7 @@
         <script src="js/blocks/geoCheckIns.js"></script>
         <script src="js/blocks/memory.js"></script>
         <script src="js/blocks/tasks.js"></script>
+		<script src="js/blocks/mongoServerStats.js"></script>
         <script src="js/blocksController.js"></script>
         <script src="js/main.js"></script>
     </body>
