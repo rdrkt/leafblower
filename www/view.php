@@ -45,12 +45,16 @@
         <script src="js/vendor/d3.3.1.5-min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="http://leafblower.rdrkt.com:8080/socket.io/socket.io.js"></script>
+		
+		<?php #Needs automating ?>
         <script src="js/blocks/countingBeanstalkd.js"></script>
         <script src="js/blocks/countingMongodb.js"></script>
         <script src="js/blocks/geoCheckIns.js"></script>
         <script src="js/blocks/memory.js"></script>
         <script src="js/blocks/tasks.js"></script>
 		<script src="js/blocks/mongoServerStats.js"></script>
+		<script src="js/blocks/mongoSlowQuery.js"></script>
+		
         <script src="js/blocksController.js"></script>
         <script src="js/main.js"></script>
     </body>

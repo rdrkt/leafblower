@@ -31,16 +31,6 @@ var viewManager = (function () {
 
     _this.loadEvents = function () {
 
-        //run it on window resize
-        $(window).on('resize', function () {
-            _this.reshapePage();
-        });
-
-        //orientation change detect
-        $(window).on('orientationchange', function () {
-            _this.reshapePage();
-        });
-
         //on connect, join profile "room"
         _this.socket.on('connect', function () {
             _this.socket.emit('join', document.location.hash.replace('#', ''));
@@ -61,13 +51,6 @@ var viewManager = (function () {
         //data throughput from Node
         _this.socket.on('data', function (data) {
             _this.blockController.handleData(data);
-            //$('footer').after('<p class="log-block" style="margin:0 auto; width:960px; font-family:monospace;">' + data.substr(0, 116) + ' ...</p>');
-            //$('.log-block:nth(10)').remove();
-            if ($('#log-counter').length < 1) {
-                $('footer').after('<p id="log-counter">0</p>');
-            } else {
-                $('#log-counter').text(parseInt($('#log-counter').text())+1);
-            }
         });
 
         //block delete event
@@ -87,6 +70,15 @@ var viewManager = (function () {
         *
         */
 
+        //run it on window resize
+        $(window).on('resize', function () {
+            _this.reshapePage();
+        });
+
+        //orientation change detect
+        $(window).on('orientationchange', function () {
+            _this.reshapePage();
+        });
 
         //handles an expandable block being toggled to a full-width expandable block
         $(document).on('click', '.expandable-block .expander-link', function (e) {

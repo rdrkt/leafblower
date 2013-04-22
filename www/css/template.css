@@ -123,19 +123,19 @@ main {
         list-style:none;
         padding:0;
         margin:15px auto 10px;
-        width:320px;
+        width:310px;
     }
     
         main #profile-list li {
-            padding:0 0 5px;
+            padding:0 0 10px;
         }
         
             main #profile-list li a {
                 display:block;
-                border-radius:3px;
-                background:#FF7500;
-                color:#00182E;
-                padding:4px 10px;
+                background:#61ae24;
+                color:#fff;
+                padding:10px 0px;
+                text-align:center;
             }
     
     main .block {
@@ -230,8 +230,9 @@ main {
             outline:none;
         }
         
-        main .block h3 a span {
+        main .block h3 span {
             font-size:11px;
+            line-height:20px;
             display:block;
             padding-top:4px;
         }
