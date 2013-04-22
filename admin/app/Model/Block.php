@@ -76,12 +76,12 @@ class Block extends AppModel {
 		$db = new MongoClient("mongodb://{$options['host']}");
 		$db = $db->selectDb($options['db']);
 	
-		$stats = $db->execute('db.serverStatus()');	
-		$stats = json_decode($stats);
+		$stats = $db->execute('db.serverStatus()');
+		$stats = $stats['retval'];
 		
-		extract($stats);		
+		extract($stats);
 		$ret = compact(array('host', 'uptime', 'connections', 'backgroundFlushing'));
-	
+
 		return $ret;
 	}
 
