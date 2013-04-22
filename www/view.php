@@ -17,7 +17,7 @@
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
-    <body>
+    <body class="view-profile">
         
         <div id="loading-overlay"></div>
 		<img id="loading-gif" src="images/loading.gif" alt="Loading..." title="Loading..." />
@@ -48,7 +48,8 @@
         <script src="js/blocks/countingBeanstalkd.js"></script>
         <script src="js/blocks/countingMongodb.js"></script>
         <script src="js/blocks/geoCheckIns.js"></script>
-        <script src="js/blocks/gridfsView.js"></script>
+        <script src="js/blocks/memory.js"></script>
+        <script src="js/blocks/tasks.js"></script>
         <script src="js/blocksController.js"></script>
         <script src="js/main.js"></script>
     </body>
