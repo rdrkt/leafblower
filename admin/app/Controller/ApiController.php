@@ -1,7 +1,7 @@
 <?php
 
 class ApiController extends AppController {
-	public $uses = array('Block', 'User', 'Profile', 'Log');
+	public $uses = array('Block', 'BlockHistory', 'User', 'Profile', 'Log');
 	
 	public function beforeFilter(){
 		Configure::write('debug', 0);
@@ -196,7 +196,7 @@ class ApiController extends AppController {
 		$data = $this->Block->live($block);
 				
 		if(!empty($data)){			
-			$this->BlockHistory->store($block, $data);
+			//$this->BlockHistory->store($block, $data);
 			return $this->_toJson($data);
 		}
 		
