@@ -61,11 +61,11 @@ Want to write your own Block? Here’s an example of how easy it is to add a new
 
 ###The PHP Controller:###
 
-All Blocks live in ``admin/app/Lib/Blocks``.  They are vanilla PHP.  All you have to do is implement your own version of ``display()`` which accepts an array of options and then outputs an array to send to your display JavaScript.
+All Blocks live in ``admin/app/Lib/Block``.  They are vanilla PHP.  All you have to do is implement your own version of ``display()`` which accepts an array of options and then outputs an array to send to your display JavaScript.
 
-> class ClockBlock extends Block {
+> class ClockBlock extends BaseBlock {
 > 
->   public function display($options){
+>   public static function display($options){
 >     return date('h:i:s A');
 >   }
 >
