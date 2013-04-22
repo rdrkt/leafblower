@@ -59,6 +59,11 @@ We use ``forever`` to keep node.js up and running.
 
 > forever /path/to/leafblower/node/server.js
 
+If you don't want to use ``forever``, you can just run it the normal way.
+
+> node /path/to/leafblower/node/server.js
+
+
 An Example Block
 ----------------
 
