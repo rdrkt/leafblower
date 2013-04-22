@@ -71,6 +71,19 @@ class Block extends AppModel {
 				
 		return $ret;
 	} 
+	
+	protected function _mongoServerStats($options){
+		$db = new MongoClient("mongodb://{$options['host']}");
+		$db = $db->selectDb($options['db']);
+	
+		$stats = $db->execute('db.serverStatus()');	
+		$stats = json_decode($stats);
+		
+		extract($stats);		
+		$ret = compact(array('host', 'uptime', 'connections', 'backgroundFlushing'));
+	
+		return $ret;
+	}
 
 	protected function _countingBeanstalkd($options){
 		$queue = ClassRegistry::init('Queue.Job');
