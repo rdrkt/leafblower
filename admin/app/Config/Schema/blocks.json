@@ -3,4 +3,4 @@
 { "_id" : "geoCheckIns", "type" : "geospacial", "title" : "Visualize checkins as they occur.", "description" : "Block for visualizing the checkins occuring in your app bound by a circle centered at a given lat/lon and radius", "ttl" : 5000, "options" : { "lat" : -33.873651, "lon" : -151.2068896, "radius" : 50, "db": "demo", "collection" : "checkins" } }
 { "_id" : "tasks", "type" : "system", "title" : "System tasks", "description" : "View statistics about the number and types of processes running on your server.", "ttl" : 1000, "options" : {} }
 { "_id" : "memory", "type" : "system", "title" : "Memory", "description" : "View statistics about the memory usage on your server.", "ttl" : 1000, "options" : {} }
-{ "_id" : "mongoServerStatus", "type" : "system", "title" : "Mongo Server Status", "description" : "View statistics about a Mongo server.", "ttl" : 1000, "options" : { "db" : "demo", "host": "localhost" } }
+{ "_id" : "mongoServerStats", "type" : "system", "title" : "Mongo Server Statistics", "description" : "View statistics about a Mongo server.", "ttl" : 1000, "options" : { "db" : "demo", "host": "localhost" } }
