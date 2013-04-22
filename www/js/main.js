@@ -15,7 +15,7 @@ var viewManager = (function () {
     };
 
     _this.reshapePage = function () {
-        $('main').isotope({ itemSelector: '.block', layoutMode: 'fitRows' });
+        
     };
 
     //check current device

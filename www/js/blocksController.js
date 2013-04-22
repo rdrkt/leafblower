@@ -15,12 +15,21 @@ var blockController = (function () {
             eval('_this.' + json.block + ' = new ' + json.block + '()');
         }
 
-        eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
+        //in-case some block is added in the back but not running on the front.
+        try {
+            eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
+        } catch (err) {
+            console.error('ERR :: BLOCK TYPE PASSED BUT NOT INTERPRETED');
+            console.error(err);
+        }
 
     };
 
     _this.handleDelete = function (blockId) {
-        eval('_this.' + blockId + '.deleteBlock()');
+        //if it's actually started and running, delete.
+        if (!eval('_this.' + json.block)) {
+            eval('_this.' + blockId + '.deleteBlock()');
+        }
     };
 
     return _this.run();
