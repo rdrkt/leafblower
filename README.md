@@ -72,3 +72,24 @@ All Blocks live in ``admin/app/Lib/Blocks``.  They are vanilla PHP.  All you hav
 > }
 
 ###The javascript:###
+
+All JS block output controllers live in ``www/js/blocks``. They are vanilla JS and have jQuery/Modernizr/D3 available to them by default, and a handful of parent methods. There are two mandatory methods required in every block ``_this.setData(data)`` which is responsible for receiving JSON strings from Node and ``_this.deleteBlock()`` which is responsible for deleting the block and dropping it from the DOM should it be deleted in the admin panel, Node will send the notification and the blockController will notify your block to self-delete.
+
+> var clockBlock = (function() {
+>
+>   //defined by design pattern in use
+>   var _this = this;
+>
+>   _this.run = function () {
+>       //we need to inject a "block" into the DOM, using jQuery for ease - This will be automated in the future
+>       if ($('#clockBlock').length < 1) { $('main').append('<div class="block" id="clockBlock"><h3></h3></div>'); }
+>       //hand "_this" back
+>       return _this;
+>    };
+
+>    _this.setData = function (data) {
+>       //assuming the data has a key of "currentTime" let's place it in our block.
+>       $('#clockBlock').find('h3').html(data.currentTime + '<span>is the current time</span>
+>    }
+>
+>}
