@@ -88,8 +88,8 @@ var viewManager = (function () {
         */
 
 
-        //handles an expandable block being toggled
-        $(document).on('click', '.expandable-block h3 a', function (e) {
+        //handles an expandable block being toggled to a full-width expandable block
+        $(document).on('click', '.expandable-block .expander-link', function (e) {
             e.preventDefault();
 
             var $block = $(this).parents('.expandable-block');
@@ -112,6 +112,43 @@ var viewManager = (function () {
                     $block.find('.large-only').removeAttr('style');
                 }
             });
+        });
+
+        //handles an expandable block being toggled to a 310x310 block
+        $(document).on('click', '.growing-block .expander-link', function (e) {
+
+            e.preventDefault();
+
+            var $block = $(this).parents('.growing-block');
+
+            if ($block.is('.large-block')) {
+
+                $block.find('.large-only').fadeOut(250, function () {
+                    $block.find('.large-only').removeAttr('style');
+                    $block.animate({
+                        'height': 150,
+                        'width': 150
+                    }, 500, function () {
+                        //toggle large block class
+                        $block.removeClass('large-block');
+                    });
+                });
+
+            } else {
+
+                //add large-block class
+                $block.addClass('large-block');
+
+                $block.animate({
+                    'height': 310,
+                    'width': 310
+                }, 500, function () {
+                    $block.find('.large-only').fadeIn(250);
+                    $('html, body').animate({ 'scrollTop': $block.offset().top }, 200);
+                });
+
+            }
+
         });
 
     };

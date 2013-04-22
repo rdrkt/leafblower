@@ -11,7 +11,7 @@ var countingBeanstalkd = (function () {
         //some pretty css for the block
         $('head').append('<link rel="stylesheet" href="css/blocks/countingBeanstalkd.css" />');
         //some markup? Yeh, g'wan.
-        if ($('#countingBeanstalkd').length < 1) { $('main').append('<div class="block expandable-block" id="countingBeanstalkd"><h3><a href="" title=""></a></h3><div id="countingBeanstalkd-large" class="large-only clearfix"></div></div>'); }
+        if ($('#countingBeanstalkd').length < 1) { $('main').append('<div class="block expandable-block" id="countingBeanstalkd"><h3 class="expander-title"><a class="expander-link" href="" title=""></a></h3><div id="countingBeanstalkd-large" class="large-only clearfix"></div></div>'); }
         //DOM events? Sure!
         _this.loadEvents();
 

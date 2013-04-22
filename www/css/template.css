@@ -113,6 +113,9 @@ main {
     width:960px;
     min-height:160px;
     height:auto !important;
+}
+
+.view-profile main {
     background:url("../images/loading-blocks.gif") no-repeat 65px 65px;
 }
     
@@ -152,6 +155,35 @@ main {
             padding:5px;
             padding:5px;
         }
+
+            /* global styles for blocks */
+
+            main .block .large-only p.text-data {
+                margin:7px 0;
+                padding:3px 30px;
+                zoom:1;
+                text-align:center;
+            }
+
+                main .block .large-only p.text-data:after {
+                    clear:both;
+                    content:".";
+                    height:0;
+                    visibility:hidden;
+                    display:block;
+                }
+
+                main .block .large-only p.text-data:hover {
+                    background:#e9f2f9;
+                    cursor:default;
+                }
+
+                main .block .large-only p.text-data span {
+                    display:block;
+                    float:left;
+                    width:50%;
+                    font-weight:bold;
+                }
     
     main .large-block {
         width:310px;
