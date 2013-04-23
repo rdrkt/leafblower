@@ -1,4 +1,4 @@
-Leafblower
+![Leafblower logo](https://raw.github.com/rdrkt/leafblower/master/www/apple-touch-icon-57x57-precomposed.png) Leafblower
 ==========
 
 
@@ -6,7 +6,7 @@ Leafblower
 About Leafblower
 ----------------
 
-![Leafblower logo](https://raw.github.com/rdrkt/leafblower/master/www/apple-touch-icon-57x57-precomposed.png) Leafblower is an open source, easily extensible, flexible and live dashboarding platform. All the source code is 100% available to view and modify, but more importantly, our goal is to let you create ways to monitor your applications and hardware without having to understand the way the platform actually works.
+Leafblower is an open source, easily extensible, flexible and live dashboarding platform. All the source code is 100% available to view and modify, but more importantly, our goal is to let you create ways to monitor your applications and hardware without having to understand the way the platform actually works.
 
 If you don’t have the technical expertise to host Leafblower for yourself, our future plans include hosted deploys and enterprise level support for customers who don’t want the headache of maintaining their own monitoring solution.
 
