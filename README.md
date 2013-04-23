@@ -102,3 +102,21 @@ All JS block output controllers live in ``www/js/blocks``. They are vanilla JS a
         $('#clockBlock').find('h3').html(data.currentTime + '<span>is the current time</span>
       }
     }
+
+Screenshots
+-----------
+
+###Admin interface###
+
+Chrome - https://github.com/rdrkt/leafblower/blob/screenshots/draggin-leafblower-admin.jpg
+
+###Profile Dashboard:###
+
+Android - https://github.com/rdrkt/leafblower/blob/screenshots/android_blocks.png
+iPhone - https://github.com/rdrkt/leafblower/blob/screenshots/iphone_blocks.png
+iPad - https://github.com/rdrkt/leafblower/blob/screenshots/ipad-resolution-chrome.jpg
+Chrome - https://github.com/rdrkt/leafblower/blob/screenshots/chrome.jpg
+
+###Launch Icon###
+
+iPhone - https://github.com/rdrkt/leafblower/blob/screenshots/iphone-homescreen.png
