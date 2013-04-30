@@ -50,7 +50,9 @@ If you want to install Leafblower on a single server, it’s as easy as cloning 
 
 If you’re hosting your Leafblower dashboard on leafblower.example.com, point that domain at the ``www`` directory. We recommend pointing admin.leafblower.example.com at your ``admin`` folder, but it’s really up to you!
 
-We have a few database tables you’ll need to load into MongoDB, so 
+We have a few database tables you’ll need to load into MongoDB, and you can use the following command to import them:
+
+> mongoimport -d leafblower /path/to/leafblower/admin/app/Config/Schema/*.json
 
 Run Leafblower’s Communication Layer
 ------------------------------------
