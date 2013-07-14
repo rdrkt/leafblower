@@ -119,6 +119,62 @@ main {
     background:url("../images/loading-blocks.gif") no-repeat 65px 65px;
 }
     
+    main #frmLogin {
+        width:320px;
+        margin:0 auto;
+    }
+
+        main #frmLogin fieldset {
+            padding:10px;
+            margin-bottom:30px;
+        }
+        
+            main #frmLogin fieldset legend {
+                font-weight:bold;
+            }
+
+        main #frmLogin .field-wrapper {
+            padding:6px 0;
+        }
+
+            main #frmLogin .field-wrapper label {
+                float:left;
+                width:120px;
+            }
+
+            main #frmLogin .field-wrapper input[type="text"],
+            main #frmLogin .field-wrapper input[type="password"] {
+                -moz-box-sizing:border-box;
+                -webkit-box-sizing:border-box;
+                box-sizing:border-box;
+                float:right;
+                width:180px;
+
+            }
+
+            main #frmLogin .field-wrapper input[type="submit"] {
+                background:#61ae24;
+                float:right;
+                border:none;
+                padding:5px 10px;
+                color:#fff;
+                transition:opacity .5s;
+            }
+
+                main #frmLogin .field-wrapper input[type="submit"]:active,
+                main #frmLogin .field-wrapper input[type="submit"]:hover {
+                    opacity:.85;
+                }
+
+            main #frmLogin .field-wrapper .forgotten-password {
+                font-size:11px;
+                opacity:.7;
+            }
+                
+
+            
+    
+
     main #profile-list {
         list-style:none;
         padding:0;

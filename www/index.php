@@ -30,6 +30,24 @@
 
         <main>
             
+			<form id="frmLogin" method="post" action="">
+				<fieldset>
+					<legend>Authentication Required</legend>
+					<div class="field-wrapper clearfix">
+						<label for="txtUsername">Username:</label>
+						<input type="text" value="" placeholder="Your username" name="txtUsername" id="txtUsername" />
+					</div>
+					<div class="field-wrapper clearfix">
+						<label for="txtPassword">txtPassword:</label>
+						<input type="password" value="" placeholder="******" name="txtPassword" id="txtPassword" />
+					</div>
+					<div class="field-wrapper clearfix">
+						<a href="/forgotten-password" title="Forgotten password?" class="forgotten-password">Forgotten password?</a>
+						<input type="submit" name="btnSubmit" value="Login" />
+					</div>
+				</fieldset>
+			</form>
+			
         </main>
 
         <footer>
@@ -41,7 +59,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script>
-            document.location = 'list.php'; // temp till auth is added
+            //document.location = 'list.php'; // temp till auth is added
         </script>
         <script src="js/blocksManager.js"></script>
         <script src="js/main.js"></script>
