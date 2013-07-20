@@ -29,11 +29,17 @@ var viewManager = (function () {
         }
     };
 
+    //get url params
+    _this.getParameterByName = function(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
     _this.loadEvents = function () {
 
         //on connect, join profile "room"
         _this.socket.on('connect', function () {
-            _this.socket.emit('join', document.location.hash.replace('#', ''));
+            _this.socket.emit('join', _this.getParameterByName('profileId'));
         });
 
         //feedback that a profile room is joined

@@ -18,18 +18,49 @@ var blockController = (function () {
 
         //if the block isn't initialised, startup.
         if (!eval('_this.' + json.block)) {
-            eval('_this.' + json.block + ' = new ' + json.block + '()');
-        }
+            
+            //if the instantiation fails, the block doesn't exist
+            try {
 
-        //in-case some block is added in the back but not running on the front.
-        try {
-            eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
-        } catch (err) {
-            console.error('ERR :: BLOCK TYPE PASSED BUT NOT INTERPRETED');
-            console.error(err);
+                eval('_this.' + json.block + ' = new ' + json.block + '()');
+                eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
+
+            } catch (err) {
+
+                //Get the CSS if there is some.
+                $.get('css/blocks/' + json.block + '.css', function (data, textStatus, jqxhr) {
+
+                    //all loaded.
+                    if (textStatus === 'success') {
+                        $('head').append('<style type="text/css" id="style-' + json.block + '">' + data + '</script>');
+                        eval('_this.' + json.block + ' = new ' + json.block + '()');
+                        eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
+                    }
+
+                    //fail safe in-case the block was sent but the JS isn't there
+                })
+
+                //Get the JS, stick it in the DOM, and run.
+                $.get('js/blocks/' + json.block + '.js', function (data, textStatus, jqxhr) {
+
+                    //all loaded.
+                    if (textStatus === 'success') {
+                        $('body').append('<script type="text/javascript" id="script-' + json.block + '">' + data + '</script>');
+                        eval('_this.' + json.block + ' = new ' + json.block + '()');
+                        eval('_this.' + json.block + '.setData(' + JSON.stringify(json.data) + ')');
+                    }
+                
+                //fail safe in-case the block was sent but the JS isn't there
+                }).fail(function () {
+                    console.error('ERR ('+json.block+') :: BLOCK TYPE RECEIVED BUT NOT INTERPRETED');
+                });
+            }
+
         }
 
     };
+
+
 
     _this.handleDelete = function (blockId) {
         //if it's actually started and running, delete.

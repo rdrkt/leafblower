@@ -1,17 +1,17 @@
 <?php
-
+	
+	//global define
+	define('LEAFBLOWER', true);
+	
+	//classes
+	require_once('classes/Config.php');
 	require_once('classes/Api.php');
 	require_once('classes/Auth.php');	
-	$Auth = new Auth();
+	require_once('classes/TemplateManager.php');
 	
-	$tplName = 'default';
-
-	if (!isset($_GET['url']) || !file_exists('templates/'.$tplName.'/'.$_GET['url'].'.phtml')) {
-		$filename = 'index';
-	} else {
-		$filename = $_GET['url'];
-	}
-
-	require('templates/'.$tplName.'/'.$filename.'.phtml');
+	//get auth manager and template manager.
+	$templateManager = new TemplateManager;
 	
+	//output template
+	echo $templateManager->loadTemplate();
 ?>
