@@ -22,16 +22,19 @@
 		
 		private function checkAuth($user, $password) {
 			
-			//api call not written yet, return true.
-			return 'sdkfjhchfh9ryco8q274ro862tnox87r2';
-			
+			//api call not written yet, return true.			
 			$jsonData = $this->getData('user', 'authenticate', array('username'=>$user,'password'=>sha1($password)));
 			
-			
+			return $jsonData;
 		}
 		
 		public function isAuthenticated() {
 			//needs sorting.
+			return true;
+		}
+		
+		public function logout() {
+			unset($_SESSION['authCode']);
 			return true;
 		}
 		

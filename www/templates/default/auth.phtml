@@ -4,28 +4,23 @@
         
         <header class="clearfix">
             <a class="title" href="http://leafblower.rdrkt.com" target="_blank"><img src="images/leafblower-logo.png" alt="Leafblower" /></a>
-            <nav>
-				<a href="/list" title="List profiles">
-					<img src="images/list-profiles.png" alt="List profile">
-				</a>
-			</nav>
         </header>
 
         <main>
             
 			<form id="frmLogin" method="post" action="">
 				<fieldset>
-					<legend>Authentication Required</legend>
+					<legend><span class="icon-lock"></span> Authentication Required</legend>
 					<div class="field-wrapper clearfix">
 						<label for="txtUsername">Username:</label>
 						<input type="text" value="" placeholder="Your username" name="txtUsername" id="txtUsername" />
 					</div>
 					<div class="field-wrapper clearfix">
-						<label for="txtPassword">txtPassword:</label>
+						<label for="txtPassword">Password:</label>
 						<input type="password" value="" placeholder="******" name="txtPassword" id="txtPassword" />
 					</div>
 					<div class="field-wrapper clearfix">
-						<a href="/forgotten-password" title="Forgotten password?" class="forgotten-password">Forgotten password?</a>
+						<a href="/recover" title="Forgotten password?" class="forgotten-password">Forgotten password?</a>
 						<input type="submit" name="btnSubmit" value="Login" />
 					</div>
 				</fieldset>
@@ -37,11 +32,5 @@
             <p class="powered">Leafblower by <a href="http://www.rdrkt.com" target="_blank" title="rdrkt">rdrkt.com</a></p>
         </footer>
 
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/blocksManager.js"></script>
-        <script src="js/main.js"></script>
     </body>
 </html>

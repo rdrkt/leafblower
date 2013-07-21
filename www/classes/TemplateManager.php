@@ -57,6 +57,10 @@
 			return $markup;
 		}
 		
+		public function gotoTemplate($tpl) {
+			header("Location: $tpl");
+		}
+		
 	}
 
 ?>
