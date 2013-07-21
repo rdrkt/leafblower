@@ -2,6 +2,8 @@
 
 	class TemplateManager extends Auth {
 		
+		private $errorOutput = '';
+		
 		private function loadBlockResources() {
 			
 			$resource = '';
@@ -11,9 +13,7 @@
 				$data = $this->getData('profile', 'list');
 				$obj = json_decode($data);
 				
-				if (count($obj->data) > 0) {
-					
-					
+				if (isset($obj->data) && count($obj->data) > 0) {
 					
 					foreach ($obj->data as $profile) {
 						
@@ -24,10 +24,12 @@
 								$fileContents = file_get_contents('js/blocks/'.$block->_id.'.js');
 								
 								$resource .= "\r\n".\JShrink\Minifier::minify($fileContents);
-									
+								
 							}
 						}
 					}
+				} else {
+					$this->errorOutput .= '<li>Sorry, the profile you\'re viewing appears to be currently unavailable. Please check your system administrator.</li>';
 				}
 			}
 			
