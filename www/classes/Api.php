@@ -18,7 +18,7 @@
 			}
 			
 			//get json feedback
-			$json = curl_exec($curl);
+			$json = curl_exec($ch);
 			
 			//close curl handler
 			curl_close($ch); 

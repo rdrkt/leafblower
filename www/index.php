@@ -3,6 +3,9 @@
 	//global define
 	define('LEAFBLOWER', true);
 	
+	//libs used	
+	require_once('libs/jshrink.php');
+	
 	//classes
 	require_once('classes/Config.php');
 	require_once('classes/Api.php');

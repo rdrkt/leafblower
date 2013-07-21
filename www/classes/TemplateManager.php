@@ -3,12 +3,35 @@
 	class TemplateManager extends Auth {
 		
 		private function loadBlockResources() {
-			//die($_GET['profileId']);
+			
+			$resource = '';
+			
 			if (isset($_GET['profileId']) && is_string($_GET['profileId'])) {
-				$data = $this->getData('profile', 'list', ['id',mysql_real_escape_string($_GET['profileId'])]);
-				var_dump($data);
-				exit;
+				
+				$data = $this->getData('profile', 'list');
+				$obj = json_decode($data);
+				
+				if (count($obj->data) > 0) {
+					
+					
+					
+					foreach ($obj->data as $profile) {
+						
+						if ($profile->_id == $_GET['profileId']) {
+							
+							foreach($profile->blocks as $block) {
+								
+								$fileContents = file_get_contents('js/blocks/'.$block->_id.'.js');
+								
+								$resource .= "\r\n".\JShrink\Minifier::minify($fileContents);
+									
+							}
+						}
+					}
+				}
 			}
+			
+			return '<script type="text/javascript" id="block-scripts-'.$_GET['profileId'].'">'.$resource.'</script>';
 			
 		}
 		
