@@ -13,18 +13,34 @@
         </header>
 
         <main>
-            
-            <ul id="profile-list"></ul>
+
+            <ul id="profile-list">
+            <?php
+                if ($jsonString = $this->getData('profile','list')) {
+                    if ($profileList = json_decode($jsonString)) {
+                        if ($profileList->success == 'true') {
+                            foreach ($profileList->data as $key => $profile) {
+                                echo '<li><a href="/view?profileId='.$profile->_id.'" title="'.$profile->name.'">'.$profile->name.'</a></li>';
+                            }
+                        }
+                        else {
+                            echo '<li>Profile list retrieval failed.</li>';
+                        }
+                    }
+                    else {
+                        echo '<li>Profile list retrieval failed.</li>';
+                    }
+                }
+                else {
+                    echo '<li>Profile list API call failed.</li>';
+                }
+            ?>
+            </ul>
 
         </main>
 
         <footer>
             <p class="powered">Leafblower by <a href="http://www.rdrkt.com" target="_blank" title="rdrkt">rdrkt.com</a></p>
         </footer>
-
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="js/list.js"></script>
     </body>
 </html>

@@ -3,7 +3,8 @@
 	class TemplateManager extends Auth {
 		
 		private $errorOutput = '';
-		
+		private $cssString = '';
+
 		private function loadBlockResources() {
 			
 			$resource = '';
@@ -36,9 +37,31 @@
 			return '<script type="text/javascript" id="block-scripts-'.$_GET['profileId'].'">'.$resource.'</script>';
 			
 		}
-		
+
+        private function minifyCSS($str) {
+
+                $re1 = <<<'EOS'
+                    (?sx)("(?:[^"\\]++|\\.)*+"| '(?:[^'\\]++|\\.)*+')|/\* (?> .*? \*/ )
+EOS;
+
+                $re2 = <<<'EOS'
+                    (?six)("(?:[^"\\]++|\\.)*+"| '(?:[^'\\]++|\\.)*+')|\s*+ ; \s*+ ( } ) \s*+|\s*+ ( [*$~^|]?+= | [{};,>~+-] | !important\b ) \s*+|( [[(:] ) \s++|\s++ ( [])] )|\s++ ( : ) \s*+(?!(?>[^{}"']++| "(?:[^"\\]++|\\.)*+"| '(?:[^'\\]++|\\.)*+')*+{)|^ \s++ | \s++ \z|(\s)\s+
+EOS;
+
+                $str = preg_replace("%$re1%", '$1', $str);
+                return preg_replace("%$re2%", '$1$2$3$4$5$6$7', $str);
+
+        }
+
+        private function addCSS($cssFile) {
+            if (file_exists(__DIR__.'/../'.$cssFile)) {
+                $this->cssString .= $this->minifyCSS(file_get_contents(__DIR__.'/../'.$cssFile)) . "/r/n";
+            } else {
+                die('Invalid CSS entered, cannot be found. :: '.__DIR__.'/../'.$cssFile);
+            }
+        }
+
 		public function loadTemplate() {
-			
 			//if the template is invalid or not specified, goto index
 			if (!$this->isAuthenticated()) {
 				$filename = 'auth';
@@ -55,7 +78,9 @@
 			require('templates/'.$this->templateName.'/'.$filename.'.phtml');
 			$markup = ob_get_contents();
 			ob_end_clean();
-			
+
+            $markup = str_ireplace('</head>', '<style>'.$this->cssString.'</style></head>', $markup);
+
 			return $markup;
 		}
 		
