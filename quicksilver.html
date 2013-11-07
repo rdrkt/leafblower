@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Quicksilver Demo</title>
+<style>
+	body { background-color: #efefff; }
+
+    .play { width: 600px; height: 600px; margin: auto; }
+	.block {
+		background-color: #fff; 
+		width: 40px;
+		height: 40px;
+		border-radius: 20px;
+		float: left;
+		margin: 10px;
+		padding: 0;
+
+		-webkit-box-shadow: -1px 1px 5px 0px rgba( 0, 0, 0, 1);
+		box-shadow: -1px 1px 5px 0px rgba( 0, 0, 0, 1);
+		transition: all 0.25s;
+
+	}
+	
+	.block:hover {
+		-webkit-box-shadow: -1px 1px 15px 0px rgba( 0, 0, 0, 1);
+		box-shadow: -1px 1px 15px 0px rgba( 0, 0, 0, 1);
+		width: 44px;
+		height: 44px;
+		border-radius: 22px;
+		margin: 8px;
+		cursor: pointer;
+	}
+	
+	.play .click {
+		width: 40px;
+		height: 40px;
+		border-radius: 20px;
+		margin: 10px;
+		
+		transition: none;
+		
+		background-color: #eee;
+		-webkit-box-shadow: inset -1px 1px 5px 0px rgba( 0, 0, 0, 1);
+		box-shadow: inset -1px 1px 5px 0px rgba( 0, 0, 0, 1);
+	}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(function(){
+
+	
+	for(i=0; i < 10; i++){
+		for(j=0; j<10; j++){
+			block = $('<div class="block"></div>');
+			block.attr('id', 'block-' + i + '-' + j);
+			block.appendTo($('.play'));
+		}
+	}
+	
+	$(".play .block").click(function(){
+		$(this).addClass('click');
+	});
+});
+</script>
+
+</head>
+<body>
+	<div class="play"></div>
+</body>
+</html>
